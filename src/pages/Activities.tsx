@@ -1,0 +1,6 @@
+import { useState } from 'react';
+import { activities } from '../content';
+import { ActivityCard } from '../components/Cards';
+import { ExampleNote, FilterTabs } from '../components/UI';
+export default function Activities() { const [category,setCategory] = useState('全部'); const list = activities.filter(a => category === '全部' || category === a.category); return <div className="page-dark collection-page"><section className="collection-header"><div className="container"><div className="page-heading"><div><span className="eyebrow">BUILD TOGETHER</span><h1>在一起做事的日子里，<br/><span>慢慢变得更好。</span></h1><p>技术交流 · 动手实践 · 项目分享</p></div><span className="page-index">02<span>ACTIVITIES</span></span></div><FilterTabs items={['全部','技术培训','动手实践','项目交流']} value={category} onChange={setCategory}/></div></section><section className="collection-results"><div className="container"><p className="results-count" aria-live="polite">{list.length} 项活动档案示例</p><div className="activity-grid">{list.map(a => <ActivityCard key={a.id} activity={a}/>)}</div><ExampleNote>活动为档案展示示例，图片为概念场景，不代表已举办的活动。</ExampleNote></div></section><div className="activity-quote container"><IconSquare/><blockquote>有些知识，只有亲手做过才真正属于你。</blockquote><span>LEARN BY BUILDING.</span></div></div>; }
+function IconSquare() {return <span className="quote-mark">“</span>;}

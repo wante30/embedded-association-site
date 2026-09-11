@@ -1,0 +1,5 @@
+import { useState } from 'react';
+import { members } from '../content';
+import { MemberCard } from '../components/Cards';
+import { EmptyState, ExampleNote, FilterTabs, JoinBanner } from '../components/UI';
+export default function Members() { const [group,setGroup] = useState('全部'); const list = members.filter(m => group === '全部' || m.group === group); return <><section className="section members-page"><div className="container"><div className="member-heading"><div><span className="eyebrow">PEOPLE BEHIND THE PROJECTS</span><h1>不一样的专长，<br/><span className="blue-text">同样热爱的我们。</span></h1><p>每个项目背后，都是一群愿意认真把事情做好的人。</p></div><div className="people-decoration" aria-hidden="true"><span/><span/><span/><span/><i>BETTER TOGETHER.</i></div></div><FilterTabs items={['全部','指导教师','负责人','核心成员','历届成员']} value={group} onChange={setGroup}/><ExampleNote>人物卡片为中性占位，不代表真实人员。姓名与照片须经本人同意后发布。</ExampleNote>{list.length ? <div className="members-grid">{list.map(m => <MemberCard key={m.id} member={m}/>)}</div> : <EmptyState reset={() => setGroup('全部')}/>}</div></section><JoinBanner/></>; }

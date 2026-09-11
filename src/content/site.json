@@ -1,0 +1,464 @@
+{
+  "site": {
+    "name": "单片机与嵌入式技术协会",
+    "shortName": "嵌入式技术协会",
+    "school": "哈尔滨理工大学",
+    "englishName": "MCU & EMBEDDED ASSOCIATION",
+    "tagline": "让代码驱动硬件，让创意真正运行。",
+    "description": "从一颗 LED 到一套完整系统，在动手、分享与协作中，把想法带进真实世界。",
+    "github": "https://github.com/wante30/embedded-association-site",
+    "recruitmentUrl": "",
+    "email": "",
+    "preview": true
+  },
+  "directions": [
+    {
+      "id": "embedded",
+      "icon": "cpu",
+      "name": "嵌入式开发",
+      "en": "EMBEDDED",
+      "description": "从底层驱动到实时系统",
+      "tags": "STM32 · ESP32 · RTOS"
+    },
+    {
+      "id": "iot",
+      "icon": "wifi",
+      "name": "物联网",
+      "en": "INTERNET OF THINGS",
+      "description": "连接设备，也连接想法",
+      "tags": "MQTT · Wi-Fi · BLE"
+    },
+    {
+      "id": "ai",
+      "icon": "spark",
+      "name": "边缘智能",
+      "en": "EDGE INTELLIGENCE",
+      "description": "把智能带到设备身边",
+      "tags": "OpenCV · YOLO · NPU"
+    },
+    {
+      "id": "robotics",
+      "icon": "robot",
+      "name": "机器人",
+      "en": "ROBOTICS",
+      "description": "让感知与控制协同运行",
+      "tags": "运动控制 · 机器视觉"
+    },
+    {
+      "id": "electronics",
+      "icon": "circuit",
+      "name": "电子设计",
+      "en": "ELECTRONICS",
+      "description": "从原理图到第一块电路板",
+      "tags": "PCB · 焊接 · 硬件调试"
+    },
+    {
+      "id": "contests",
+      "icon": "trophy",
+      "name": "技术竞赛",
+      "en": "ENGINEERING CHALLENGES",
+      "description": "把学习变成一次真实挑战",
+      "tags": "电子设计 · 物联网 · AI"
+    }
+  ],
+  "projects": [
+    {
+      "id": "esp32-homepilot",
+      "name": "HomePilot 智能家居终端",
+      "shortName": "智能家居终端",
+      "category": "物联网",
+      "art": "home",
+      "kicker": "CONNECTED LIVING",
+      "summary": "一个小小的桌面终端，连接传感器、生活与每一次交互。",
+      "tags": [
+        "ESP32-S3",
+        "MQTT",
+        "LVGL"
+      ],
+      "status": "概念展示",
+      "example": true,
+      "background": "以桌面智能终端为例，探索传感器采集、网络通信与本地交互如何组成完整系统。",
+      "goal": "让环境数据易于查看，让设备控制直观可用，并保留可扩展的硬件接口。",
+      "architecture": [
+        "传感器采集",
+        "ESP32-S3",
+        "MQTT 通信",
+        "屏幕交互"
+      ],
+      "result": "本页用于展示项目档案的结构。真实硬件版本、实测指标、代码地址与团队成员需要由维护者确认后补充。",
+      "image": ""
+    },
+    {
+      "id": "stm32-control",
+      "name": "基于 STM32 的智能控制系统",
+      "shortName": "智能移动平台",
+      "category": "嵌入式",
+      "art": "robot",
+      "kicker": "MOTION & CONTROL",
+      "summary": "从一次稳定的电机转动开始，让感知、决策与控制形成闭环。",
+      "tags": [
+        "STM32",
+        "FreeRTOS",
+        "PID"
+      ],
+      "status": "概念展示",
+      "example": true,
+      "background": "以模块化移动平台为例，组织电机驱动、传感器输入和实时任务调度。",
+      "goal": "围绕可验证的控制任务，建立清晰的硬件接口和可维护的软件结构。",
+      "architecture": [
+        "传感器输入",
+        "STM32 控制",
+        "闭环调节",
+        "电机执行"
+      ],
+      "result": "当前为展示示例，未声明实际比赛成绩、控制精度或测试结果。正式项目可在此补充测试条件与实验记录。",
+      "image": ""
+    },
+    {
+      "id": "edge-vision",
+      "name": "EdgeSight 边缘视觉平台",
+      "shortName": "边缘视觉平台",
+      "category": "边缘 AI",
+      "art": "vision",
+      "kicker": "INTELLIGENCE AT THE EDGE",
+      "summary": "让模型离开云端，在一块小板上完成识别、判断与反馈。",
+      "tags": [
+        "RK3588",
+        "OpenCV",
+        "ONNX"
+      ],
+      "status": "概念展示",
+      "example": true,
+      "background": "以边缘视觉设备为例，展示摄像头采集、模型推理和设备反馈的完整链路。",
+      "goal": "建立能够解释和复现的部署流程，而不只展示单一识别结果。",
+      "architecture": [
+        "图像采集",
+        "预处理",
+        "端侧推理",
+        "设备反馈"
+      ],
+      "result": "推理速度、模型精度和功耗尚未填入真实测量数据；此处保留清晰的实验记录位置。",
+      "image": ""
+    }
+  ],
+  "activities": [
+    {
+      "id": "stm32-workshop",
+      "title": "从 0 到 1，点亮第一颗 LED",
+      "category": "技术培训",
+      "summary": "认识开发板，写下第一行代码，让抽象的知识第一次变得看得见。",
+      "image": "",
+      "art": "board",
+      "duration": "入门工作坊",
+      "example": true,
+      "body": "活动档案示例：可以在这里记录培训目标、准备材料、操作步骤与现场反馈。时间、地点和报名方式以协会实际发布为准。",
+      "outline": [
+        "认识开发板与基本接口",
+        "配置开发环境并完成烧录",
+        "用按键控制一颗 LED",
+        "记录问题，交流解决方法"
+      ]
+    },
+    {
+      "id": "hardware-night",
+      "title": "一块电路板，是怎样诞生的",
+      "category": "动手实践",
+      "summary": "从原理图、元器件到焊接与调试，一起走过硬件制作的完整过程。",
+      "image": "/images/lab-scene.webp",
+      "art": "lab",
+      "duration": "硬件实践",
+      "example": true,
+      "body": "活动档案示例：记录从阅读原理图到测试成品的实践过程。现场照片和活动日期尚未提供，不代表已举行的活动。",
+      "outline": [
+        "阅读原理图与器件手册",
+        "了解焊接工具和操作规范",
+        "检查电源与通信接口",
+        "分享调试记录与经验"
+      ]
+    },
+    {
+      "id": "project-sharing",
+      "title": "不止于演示，更在于分享",
+      "category": "项目交流",
+      "summary": "把作品带到同一张桌子上，分享选择、失误，以及那些终于跑通的瞬间。",
+      "image": "",
+      "art": "community",
+      "duration": "项目交流",
+      "example": true,
+      "body": "活动档案示例：一次项目交流可以包含系统介绍、实物演示、问题讨论和复盘。以下为参考内容，不是已经发生的活动报道。",
+      "outline": [
+        "介绍项目要解决的问题",
+        "展示系统结构与实物",
+        "讨论设计取舍与困难",
+        "整理可以公开的技术资料"
+      ]
+    }
+  ],
+  "culture": [
+    {
+      "id": "practice",
+      "title": "动手实践",
+      "text": "在真实问题中，理解每一行代码。",
+      "image": "/images/lab-scene.webp"
+    },
+    {
+      "id": "share",
+      "title": "开放分享",
+      "text": "把经验留下，让后来的人少走弯路。",
+      "image": "/images/workbench.webp"
+    },
+    {
+      "id": "together",
+      "title": "一起成长",
+      "text": "不同的专长，在同一个项目里相遇。",
+      "image": "/images/collaboration.webp"
+    }
+  ],
+  "awards": [
+    {
+      "id": "iot-contest",
+      "year": "2026",
+      "name": "全国大学生物联网设计竞赛",
+      "level": "国家级",
+      "award": "奖项待核实",
+      "project": "项目名称待补充",
+      "example": true
+    },
+    {
+      "id": "robot-ai",
+      "year": "2026",
+      "name": "中国机器人及人工智能大赛",
+      "level": "省级",
+      "award": "奖项待核实",
+      "project": "项目名称待补充",
+      "example": true
+    },
+    {
+      "id": "campus-project",
+      "year": "2025",
+      "name": "校园创新实践项目",
+      "level": "校级",
+      "award": "成果待录入",
+      "project": "项目名称待补充",
+      "example": true
+    }
+  ],
+  "members": [
+    {
+      "id": "advisor",
+      "role": "指导教师",
+      "name": "教师信息待确认",
+      "focus": "教学指导 · 工程实践",
+      "group": "指导教师",
+      "tone": "blue",
+      "example": true,
+      "image": ""
+    },
+    {
+      "id": "lead",
+      "role": "协会负责人",
+      "name": "负责人信息待确认",
+      "focus": "组织协作 · 项目管理",
+      "group": "负责人",
+      "tone": "teal",
+      "example": true,
+      "image": ""
+    },
+    {
+      "id": "embedded",
+      "role": "嵌入式方向",
+      "name": "成员信息待补充",
+      "focus": "STM32 · 实时系统",
+      "group": "核心成员",
+      "tone": "blue",
+      "example": true,
+      "image": ""
+    },
+    {
+      "id": "iot",
+      "role": "物联网方向",
+      "name": "成员信息待补充",
+      "focus": "ESP32 · 设备连接",
+      "group": "核心成员",
+      "tone": "violet",
+      "example": true,
+      "image": ""
+    },
+    {
+      "id": "hardware",
+      "role": "硬件设计方向",
+      "name": "成员信息待补充",
+      "focus": "PCB · 电子设计",
+      "group": "核心成员",
+      "tone": "amber",
+      "example": true,
+      "image": ""
+    },
+    {
+      "id": "vision",
+      "role": "边缘智能方向",
+      "name": "成员信息待补充",
+      "focus": "视觉感知 · 端侧部署",
+      "group": "核心成员",
+      "tone": "teal",
+      "example": true,
+      "image": ""
+    }
+  ],
+  "learningPaths": [
+    "单片机入门",
+    "联网与实时系统",
+    "硬件设计实践",
+    "边缘智能部署"
+  ],
+  "resources": [
+    {
+      "id": "stm32",
+      "name": "STM32 开发入门",
+      "category": "单片机",
+      "description": "从官方开发工具开始，认识工程配置、驱动与调试。",
+      "level": "入门",
+      "tags": [
+        "STM32",
+        "官方工具"
+      ],
+      "url": "https://www.st.com/en/development-tools/stm32cubemx.html",
+      "publisher": "STMicroelectronics"
+    },
+    {
+      "id": "esp-idf",
+      "name": "ESP-IDF 编程指南",
+      "category": "单片机",
+      "description": "沿着乐鑫官方文档，开始 ESP32 的第一个工程。",
+      "level": "入门",
+      "tags": [
+        "ESP32",
+        "SDK"
+      ],
+      "url": "https://docs.espressif.com/projects/esp-idf/zh_CN/stable/esp32/",
+      "publisher": "Espressif"
+    },
+    {
+      "id": "freertos",
+      "name": "FreeRTOS 开发文档",
+      "category": "嵌入式",
+      "description": "理解任务、队列和同步，让多个模块有序协作。",
+      "level": "进阶",
+      "tags": [
+        "RTOS",
+        "任务调度"
+      ],
+      "url": "https://www.freertos.org/Documentation/00-Overview",
+      "publisher": "FreeRTOS"
+    },
+    {
+      "id": "linux",
+      "name": "Linux 内核文档",
+      "category": "嵌入式",
+      "description": "把驱动、设备和系统的基础概念串联起来。",
+      "level": "进阶",
+      "tags": [
+        "Linux",
+        "驱动"
+      ],
+      "url": "https://docs.kernel.org/",
+      "publisher": "Linux Kernel"
+    },
+    {
+      "id": "mqtt",
+      "name": "MQTT 协议与生态",
+      "category": "物联网",
+      "description": "认识消息发布与订阅，理解设备通信的基本模型。",
+      "level": "入门",
+      "tags": [
+        "MQTT",
+        "通信"
+      ],
+      "url": "https://mqtt.org/",
+      "publisher": "MQTT.org"
+    },
+    {
+      "id": "http",
+      "name": "HTTP 学习指南",
+      "category": "物联网",
+      "description": "从请求和响应开始，理解设备与服务如何交换数据。",
+      "level": "入门",
+      "tags": [
+        "HTTP",
+        "Web"
+      ],
+      "url": "https://developer.mozilla.org/zh-CN/docs/Web/HTTP",
+      "publisher": "MDN Web Docs"
+    },
+    {
+      "id": "opencv",
+      "name": "OpenCV 官方教程",
+      "category": "人工智能",
+      "description": "读入一张图像，然后逐步理解视觉处理的基本步骤。",
+      "level": "入门",
+      "tags": [
+        "OpenCV",
+        "图像处理"
+      ],
+      "url": "https://docs.opencv.org/4.x/d9/df8/tutorial_root.html",
+      "publisher": "OpenCV"
+    },
+    {
+      "id": "onnx",
+      "name": "ONNX Runtime 文档",
+      "category": "人工智能",
+      "description": "从模型推理接口出发，学习跨平台部署的基本方法。",
+      "level": "进阶",
+      "tags": [
+        "ONNX",
+        "模型部署"
+      ],
+      "url": "https://onnxruntime.ai/docs/",
+      "publisher": "ONNX Runtime"
+    },
+    {
+      "id": "cmake",
+      "name": "CMake 官方教程",
+      "category": "开发工具",
+      "description": "管理源文件和构建目标，让工程结构更清楚。",
+      "level": "入门",
+      "tags": [
+        "CMake",
+        "构建"
+      ],
+      "url": "https://cmake.org/cmake/help/latest/guide/tutorial/",
+      "publisher": "CMake"
+    },
+    {
+      "id": "git",
+      "name": "GitHub 协作入门",
+      "category": "开发工具",
+      "description": "从一次提交到一次合并，把项目交给团队共同维护。",
+      "level": "入门",
+      "tags": [
+        "Git",
+        "协作"
+      ],
+      "url": "https://docs.github.com/zh/get-started",
+      "publisher": "GitHub Docs"
+    }
+  ],
+  "faq": [
+    {
+      "question": "没有基础，也可以开始吗？",
+      "answer": "可以先从认识开发板、配置环境、点亮 LED 这些小任务开始。比已经掌握多少知识更重要的，是愿意持续学习、动手验证和与同伴交流。具体招新条件以正式通知为准。"
+    },
+    {
+      "question": "需要自己购买很多硬件吗？",
+      "answer": "不建议一开始就购买大量设备。先确定学习方向与入门任务，再向负责人了解可用的公共设备和所需材料。"
+    },
+    {
+      "question": "怎样了解招新时间和报名方式？",
+      "answer": "报名入口确认后，会在本页开放。当前页面为网站视觉预览，暂不采集个人报名信息。"
+    },
+    {
+      "question": "可以参与网站和开源资料的维护吗？",
+      "answer": "欢迎通过网站仓库提出建议、报告问题或提交改进。提交照片与人物资料前，请先获得相关人员的公开展示许可。"
+    }
+  ]
+}
