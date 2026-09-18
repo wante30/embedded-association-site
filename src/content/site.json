@@ -1,15 +1,20 @@
 {
   "site": {
-    "name": "单片机与嵌入式技术协会",
-    "shortName": "嵌入式技术协会",
+    "name": "单片机与嵌入式协会",
+    "shortName": "单片机与嵌入式协会",
     "school": "哈尔滨理工大学",
+    "college": "计算机科学与技术学院",
     "englishName": "MCU & EMBEDDED ASSOCIATION",
     "tagline": "让代码驱动硬件，让创意真正运行。",
-    "description": "从一颗 LED 到一套完整系统，在动手、分享与协作中，把想法带进真实世界。",
+    "description": "成立于 2024 年，面向嵌入式、物联网、电子设计与边缘智能方向，在动手、分享与协作中把想法做成真实系统。",
+    "founded": "2024",
+    "location": "实训楼 501",
+    "advisor": "高俊锋",
+    "contact": "联系协会负责人",
     "github": "https://github.com/wante30/embedded-association-site",
     "recruitmentUrl": "",
     "email": "",
-    "preview": true
+    "preview": false
   },
   "directions": [
     {
@@ -25,23 +30,23 @@
       "icon": "wifi",
       "name": "物联网",
       "en": "INTERNET OF THINGS",
-      "description": "连接设备，也连接想法",
-      "tags": "MQTT · Wi-Fi · BLE"
+      "description": "连接设备，也连接真实场景",
+      "tags": "MQTT · Wi-Fi · AIoT"
     },
     {
       "id": "ai",
       "icon": "spark",
       "name": "边缘智能",
       "en": "EDGE INTELLIGENCE",
-      "description": "把智能带到设备身边",
-      "tags": "OpenCV · YOLO · NPU"
+      "description": "把感知与推理部署到设备侧",
+      "tags": "YOLO · RKNN · Edge AI"
     },
     {
       "id": "robotics",
       "icon": "robot",
       "name": "机器人",
       "en": "ROBOTICS",
-      "description": "让感知与控制协同运行",
+      "description": "让感知、控制与执行形成闭环",
       "tags": "运动控制 · 机器视觉"
     },
     {
@@ -49,7 +54,7 @@
       "icon": "circuit",
       "name": "电子设计",
       "en": "ELECTRONICS",
-      "description": "从原理图到第一块电路板",
+      "description": "从原理图到真实硬件系统",
       "tags": "PCB · 焊接 · 硬件调试"
     },
     {
@@ -57,140 +62,150 @@
       "icon": "trophy",
       "name": "技术竞赛",
       "en": "ENGINEERING CHALLENGES",
-      "description": "把学习变成一次真实挑战",
-      "tags": "电子设计 · 物联网 · AI"
+      "description": "在真实赛题里训练工程能力",
+      "tags": "蓝桥杯 · 物联网 · AI"
     }
   ],
   "projects": [
     {
-      "id": "esp32-homepilot",
-      "name": "HomePilot 智能家居终端",
-      "shortName": "智能家居终端",
+      "id": "huishu-2026",
+      "name": "慧枢——多模态居家养老协同系统",
+      "shortName": "慧枢",
       "category": "物联网",
       "art": "home",
-      "kicker": "CONNECTED LIVING",
-      "summary": "一个小小的桌面终端，连接传感器、生活与每一次交互。",
+      "kicker": "FEATURED PROJECT · 2026",
+      "summary": "由 ESP32-S3 手表、ESP32-P4 门侧终端与 Orange Pi 边缘中枢组成的多模态居家养老协同系统。",
       "tags": [
         "ESP32-S3",
-        "MQTT",
-        "LVGL"
-      ],
-      "status": "概念展示",
-      "example": true,
-      "background": "以桌面智能终端为例，探索传感器采集、网络通信与本地交互如何组成完整系统。",
-      "goal": "让环境数据易于查看，让设备控制直观可用，并保留可扩展的硬件接口。",
-      "architecture": [
-        "传感器采集",
-        "ESP32-S3",
-        "MQTT 通信",
-        "屏幕交互"
-      ],
-      "result": "本页用于展示项目档案的结构。真实硬件版本、实测指标、代码地址与团队成员需要由维护者确认后补充。",
-      "image": ""
-    },
-    {
-      "id": "stm32-control",
-      "name": "基于 STM32 的智能控制系统",
-      "shortName": "智能移动平台",
-      "category": "嵌入式",
-      "art": "robot",
-      "kicker": "MOTION & CONTROL",
-      "summary": "从一次稳定的电机转动开始，让感知、决策与控制形成闭环。",
-      "tags": [
-        "STM32",
-        "FreeRTOS",
-        "PID"
-      ],
-      "status": "概念展示",
-      "example": true,
-      "background": "以模块化移动平台为例，组织电机驱动、传感器输入和实时任务调度。",
-      "goal": "围绕可验证的控制任务，建立清晰的硬件接口和可维护的软件结构。",
-      "architecture": [
-        "传感器输入",
-        "STM32 控制",
-        "闭环调节",
-        "电机执行"
-      ],
-      "result": "当前为展示示例，未声明实际比赛成绩、控制精度或测试结果。正式项目可在此补充测试条件与实验记录。",
-      "image": ""
-    },
-    {
-      "id": "edge-vision",
-      "name": "EdgeSight 边缘视觉平台",
-      "shortName": "边缘视觉平台",
-      "category": "边缘 AI",
-      "art": "vision",
-      "kicker": "INTELLIGENCE AT THE EDGE",
-      "summary": "让模型离开云端，在一块小板上完成识别、判断与反馈。",
-      "tags": [
+        "ESP32-P4",
         "RK3588",
-        "OpenCV",
-        "ONNX"
+        "MCP",
+        "Home Assistant"
       ],
-      "status": "概念展示",
-      "example": true,
-      "background": "以边缘视觉设备为例，展示摄像头采集、模型推理和设备反馈的完整链路。",
-      "goal": "建立能够解释和复现的部署流程，而不只展示单一识别结果。",
+      "status": "系统集成验证完成",
+      "example": false,
+      "period": "2026 · 全国大学生物联网设计竞赛",
+      "team": "王景钰 · 刘凯 · 王迁皓",
+      "background": "面向独居、空巢老人居家场景，把健康状态、跌倒与环境风险、智能家居控制和家属响应从彼此独立的功能连接为统一事件闭环。",
+      "goal": "构建“可穿戴感知—云端认知—边缘协同—家庭执行”的完整 AIoT 链路，让手表、门侧终端、家庭中控与家属端围绕同一事件协同工作。",
       "architecture": [
-        "图像采集",
-        "预处理",
-        "端侧推理",
-        "设备反馈"
+        "ESP32-S3 随身感知",
+        "ESP32-P4 门侧交互",
+        "Orange Pi 边缘协同",
+        "Kiosk / 家居 / 家属反馈"
       ],
-      "result": "推理速度、模型精度和功耗尚未填入真实测量数据；此处保留清晰的实验记录位置。",
+      "result": "已完成智能手表、P4 门侧终端、Orange Pi 边缘中枢、六页面 Kiosk、Home Assistant 设备联动和家属通知的系统集成验证；边缘姿态推理实测约 5–7 FPS。健康算法用于趋势监测与风险提示，不作为医疗诊断依据。",
+      "image": "/images/huishu-kiosk.webp"
+    },
+    {
+      "id": "aiot-eldercare-2025",
+      "name": "基于 AIoT 的老年人语音健康管理系统",
+      "shortName": "AIoT 语音健康管理",
+      "category": "物联网",
+      "art": "home",
+      "kicker": "PROJECT EVOLUTION · 2025",
+      "summary": "以树莓派 5 为边缘中枢、ESP32-S3 为感知与语音节点，探索健康监测、家居联动与多端反馈。",
+      "tags": [
+        "Raspberry Pi 5",
+        "ESP32-S3",
+        "FastAPI",
+        "MCP"
+      ],
+      "status": "省级大创项目",
+      "example": false,
+      "period": "2025–2026 · 黑龙江省大学生创新创业训练计划",
+      "team": "王景钰等项目成员",
+      "background": "项目围绕老年人居家健康管理与低门槛语音交互展开，在前期远程健康监测研究基础上，进一步引入本地边缘计算与多设备协同。",
+      "goal": "让健康与环境感知、语音交互、家居控制和家属通知在一个可解释、可扩展的 AIoT 系统中协同运行。",
+      "architecture": [
+        "多模态传感器",
+        "ESP32-S3 节点",
+        "树莓派 5 边缘中枢",
+        "多端交互与家居联动"
+      ],
+      "result": "完成树莓派后端、数据库、AI 编排、Home Assistant 接入以及 Web / 触摸屏等多端功能的阶段性开发，并进一步演进为 2026 年“慧枢”竞赛系统。",
+      "image": "/images/huishu-architecture.webp"
+    },
+    {
+      "id": "remote-health-2024",
+      "name": "老年人健康远程监测系统的设计与实现",
+      "shortName": "远程健康监测",
+      "category": "物联网",
+      "art": "vision",
+      "kicker": "PROJECT FOUNDATION · 2024",
+      "summary": "围绕监测终端、用户终端和数据中心，探索老年健康数据采集、远程传输与可视化。",
+      "tags": [
+        "物联网",
+        "健康监测",
+        "传感器",
+        "远程通信"
+      ],
+      "status": "省级大创项目",
+      "example": false,
+      "period": "2024–2025 · 黑龙江省大学生创新创业训练计划",
+      "team": "王心如等项目成员",
+      "background": "项目从老年人健康状态持续监测需求出发，研究传感器采集、远程通信、数据分析与面向老年人的信息展示。",
+      "goal": "构建由监测终端、用户终端和数据中心组成的健康远程监测系统，为后续 AIoT 居家养老方向积累技术与场景基础。",
+      "architecture": [
+        "健康传感器",
+        "监测终端",
+        "远程通信与数据中心",
+        "用户终端"
+      ],
+      "result": "形成老年健康远程监测系统的项目方案与实践基础，并在后续项目中进一步扩展到语音交互、边缘智能和家庭设备协同。",
       "image": ""
     }
   ],
   "activities": [
     {
-      "id": "stm32-workshop",
-      "title": "从 0 到 1，点亮第一颗 LED",
+      "id": "autumn-training-2024",
+      "title": "2024 秋季第一次技术培训",
       "category": "技术培训",
-      "summary": "认识开发板，写下第一行代码，让抽象的知识第一次变得看得见。",
-      "image": "",
-      "art": "board",
-      "duration": "入门工作坊",
-      "example": true,
-      "body": "活动档案示例：可以在这里记录培训目标、准备材料、操作步骤与现场反馈。时间、地点和报名方式以协会实际发布为准。",
-      "outline": [
-        "认识开发板与基本接口",
-        "配置开发环境并完成烧录",
-        "用按键控制一颗 LED",
-        "记录问题，交流解决方法"
-      ]
-    },
-    {
-      "id": "hardware-night",
-      "title": "一块电路板，是怎样诞生的",
-      "category": "动手实践",
-      "summary": "从原理图、元器件到焊接与调试，一起走过硬件制作的完整过程。",
-      "image": "/images/lab-scene.webp",
+      "summary": "从协会方向和基础实践出发，开展集中培训与技术交流。",
+      "image": "/images/association-training-2024.webp",
       "art": "lab",
-      "duration": "硬件实践",
-      "example": true,
-      "body": "活动档案示例：记录从阅读原理图到测试成品的实践过程。现场照片和活动日期尚未提供，不代表已举行的活动。",
+      "duration": "2024 秋",
+      "example": false,
+      "body": "协会在 2024 年秋季开展第一次集中技术培训。通过课堂讲解、开发环境与实践方向介绍，帮助新成员建立从单片机基础到竞赛与项目实践的整体认识。",
       "outline": [
-        "阅读原理图与器件手册",
-        "了解焊接工具和操作规范",
-        "检查电源与通信接口",
-        "分享调试记录与经验"
+        "认识协会技术方向",
+        "了解开发环境与硬件平台",
+        "交流单片机与竞赛学习方法",
+        "为后续实践训练建立基础"
       ]
     },
     {
-      "id": "project-sharing",
-      "title": "不止于演示，更在于分享",
-      "category": "项目交流",
-      "summary": "把作品带到同一张桌子上，分享选择、失误，以及那些终于跑通的瞬间。",
-      "image": "",
+      "id": "recruitment-2024",
+      "title": "2024 协会纳新",
+      "category": "纳新活动",
+      "summary": "在校园现场介绍协会方向、学习资源与项目实践，和新同学面对面交流。",
+      "image": "/images/association-recruitment-2024.webp",
       "art": "community",
-      "duration": "项目交流",
-      "example": true,
-      "body": "活动档案示例：一次项目交流可以包含系统介绍、实物演示、问题讨论和复盘。以下为参考内容，不是已经发生的活动报道。",
+      "duration": "2024 纳新",
+      "example": false,
+      "body": "2024 年协会开展线下纳新宣传，通过现场展板与交流介绍协会的技术方向、实践内容和成长路径。当前官网暂未建立新的纳新群，后续入口会在“加入我们”页面更新。",
       "outline": [
-        "介绍项目要解决的问题",
-        "展示系统结构与实物",
-        "讨论设计取舍与困难",
-        "整理可以公开的技术资料"
+        "介绍协会与学院归属",
+        "展示技术方向与竞赛实践",
+        "解答新生学习与设备问题",
+        "建立后续培训与交流联系"
+      ]
+    },
+    {
+      "id": "bluebridge-training-2025",
+      "title": "2025 春季蓝桥杯单片机培训",
+      "category": "竞赛训练",
+      "summary": "围绕蓝桥杯单片机基础技能与典型赛题开展集中训练。",
+      "image": "/images/association-training-2025.webp",
+      "art": "board",
+      "duration": "2025 春",
+      "example": false,
+      "body": "协会在 2025 年春季继续开展单片机竞赛训练，结合蓝桥杯单片机赛题与基础技能资料，围绕开发板资源、程序结构和典型外设展开讲解与实践。",
+      "outline": [
+        "梳理竞赛平台与基础模块",
+        "结合历届赛题理解任务结构",
+        "训练常用外设与调试方法",
+        "形成可持续复习的资料与代码习惯"
       ]
     }
   ],
@@ -199,117 +214,120 @@
       "id": "practice",
       "title": "动手实践",
       "text": "在真实问题中，理解每一行代码。",
-      "image": "/images/lab-scene.webp"
+      "image": "/images/association-training-2024.webp"
     },
     {
       "id": "share",
       "title": "开放分享",
       "text": "把经验留下，让后来的人少走弯路。",
-      "image": "/images/workbench.webp"
+      "image": "/images/association-training-2025.webp"
     },
     {
       "id": "together",
       "title": "一起成长",
       "text": "不同的专长，在同一个项目里相遇。",
-      "image": "/images/collaboration.webp"
+      "image": "/images/association-group-2024.webp"
     }
   ],
   "awards": [
     {
-      "id": "iot-contest",
+      "id": "raicom-national-2026",
       "year": "2026",
-      "name": "全国大学生物联网设计竞赛",
+      "name": "2026 睿抗机器人开发者大赛（RAICOM）全国总决赛",
       "level": "国家级",
-      "award": "奖项待核实",
-      "project": "项目名称待补充",
-      "example": true
+      "award": "视觉系统创新竞赛项目三等奖",
+      "team": "孔宇熙 · 祖力喀尔·艾斯卡尔 · 田思娴",
+      "advisor": "石春源",
+      "example": false
     },
     {
-      "id": "robot-ai",
+      "id": "iot-ne-2026",
       "year": "2026",
-      "name": "中国机器人及人工智能大赛",
-      "level": "省级",
-      "award": "奖项待核实",
-      "project": "项目名称待补充",
-      "example": true
+      "name": "2026 年全国大学生物联网设计竞赛东北赛区",
+      "level": "赛区",
+      "award": "二等奖",
+      "team": "祖力喀尔·艾斯卡尔 · 梁荣凯 · 霍钰楷",
+      "advisor": "黄志若",
+      "example": false
     },
     {
-      "id": "campus-project",
-      "year": "2025",
-      "name": "校园创新实践项目",
-      "level": "校级",
-      "award": "成果待录入",
-      "project": "项目名称待补充",
-      "example": true
+      "id": "opto-ne-2026",
+      "year": "2026",
+      "name": "第十四届全国大学生光电设计竞赛东北区赛",
+      "level": "赛区",
+      "award": "创意组二等奖",
+      "team": "祖力喀尔·艾斯卡尔 · 梁荣凯 · 霍钰楷",
+      "advisor": "黄志若",
+      "example": false
+    },
+    {
+      "id": "raicom-heilongjiang-2026",
+      "year": "2026",
+      "name": "2026 睿抗机器人开发者大赛（RAICOM）黑龙江赛区",
+      "level": "省级",
+      "award": "视觉系统创新竞赛项目三等奖",
+      "team": "祖力喀尔·艾斯卡尔 · 孔宇熙 · 田思娴",
+      "advisor": "石春源",
+      "example": false
+    },
+    {
+      "id": "lanqiao-mcu-2026",
+      "year": "2026",
+      "name": "第十七届蓝桥杯全国软件和信息技术专业人才大赛电子赛",
+      "level": "省级",
+      "award": "单片机设计与开发大学组黑龙江赛区三等奖",
+      "team": "高嘉睿",
+      "advisor": "姜宇东",
+      "example": false
     }
   ],
   "members": [
     {
       "id": "advisor",
       "role": "指导教师",
-      "name": "教师信息待确认",
-      "focus": "教学指导 · 工程实践",
+      "name": "高俊锋",
+      "focus": "高级实验师 · 工程实践与竞赛指导",
       "group": "指导教师",
       "tone": "blue",
-      "example": true,
+      "example": false,
       "image": ""
     },
     {
-      "id": "lead",
-      "role": "协会负责人",
-      "name": "负责人信息待确认",
-      "focus": "组织协作 · 项目管理",
-      "group": "负责人",
+      "id": "manager-sun",
+      "role": "学生管理员",
+      "name": "孙维栋",
+      "focus": "实验室事务 · 学生协作",
+      "group": "学生管理员",
       "tone": "teal",
-      "example": true,
+      "example": false,
       "image": ""
     },
     {
-      "id": "embedded",
-      "role": "嵌入式方向",
-      "name": "成员信息待补充",
-      "focus": "STM32 · 实时系统",
-      "group": "核心成员",
+      "id": "manager-wang",
+      "role": "学生管理员",
+      "name": "王景钰",
+      "focus": "物联网工程 · 项目实践",
+      "group": "学生管理员",
       "tone": "blue",
-      "example": true,
+      "example": false,
       "image": ""
     },
     {
-      "id": "iot",
-      "role": "物联网方向",
-      "name": "成员信息待补充",
-      "focus": "ESP32 · 设备连接",
-      "group": "核心成员",
+      "id": "manager-li",
+      "role": "学生管理员",
+      "name": "李小凡",
+      "focus": "集成电路 · 实验室协作",
+      "group": "学生管理员",
       "tone": "violet",
-      "example": true,
-      "image": ""
-    },
-    {
-      "id": "hardware",
-      "role": "硬件设计方向",
-      "name": "成员信息待补充",
-      "focus": "PCB · 电子设计",
-      "group": "核心成员",
-      "tone": "amber",
-      "example": true,
-      "image": ""
-    },
-    {
-      "id": "vision",
-      "role": "边缘智能方向",
-      "name": "成员信息待补充",
-      "focus": "视觉感知 · 端侧部署",
-      "group": "核心成员",
-      "tone": "teal",
-      "example": true,
+      "example": false,
       "image": ""
     }
   ],
   "learningPaths": [
-    "单片机入门",
-    "联网与实时系统",
-    "硬件设计实践",
-    "边缘智能部署"
+    "51 单片机与 CT107D",
+    "中断 / 定时器 / 串口",
+    "STM32 / ESP32 与 RTOS",
+    "项目实践与竞赛训练"
   ],
   "resources": [
     {
@@ -446,19 +464,19 @@
   "faq": [
     {
       "question": "没有基础，也可以开始吗？",
-      "answer": "可以先从认识开发板、配置环境、点亮 LED 这些小任务开始。比已经掌握多少知识更重要的，是愿意持续学习、动手验证和与同伴交流。具体招新条件以正式通知为准。"
+      "answer": "可以。协会的学习资料从单片机开发基础、开发环境和常用外设开始，重点是愿意持续学习、动手验证和与同伴交流。"
     },
     {
       "question": "需要自己购买很多硬件吗？",
-      "answer": "不建议一开始就购买大量设备。先确定学习方向与入门任务，再向负责人了解可用的公共设备和所需材料。"
+      "answer": "不建议一开始就购买大量设备。先确定学习方向和入门任务，再联系协会负责人了解实验室可用设备和所需材料。"
     },
     {
       "question": "怎样了解招新时间和报名方式？",
-      "answer": "报名入口确认后，会在本页开放。当前页面为网站视觉预览，暂不采集个人报名信息。"
+      "answer": "当前尚未建立新的纳新群。后续纳新群和报名入口确认后会在本页更新；现阶段可联系协会负责人了解情况。"
     },
     {
-      "question": "可以参与网站和开源资料的维护吗？",
-      "answer": "欢迎通过网站仓库提出建议、报告问题或提交改进。提交照片与人物资料前，请先获得相关人员的公开展示许可。"
+      "question": "协会在哪里开展实践？",
+      "answer": "协会隶属于哈尔滨理工大学计算机科学与技术学院，主要实践空间位于实训楼 501。"
     }
   ]
 }
