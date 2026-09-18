@@ -10,3 +10,13 @@ test('router subscribes to query changes as well as pathname', () => {
   const router = read('src/lib/router.tsx');
   assert.match(router, /const snapshot[^;]*location\.search/);
 });
+
+test('runtime media paths respect the deployment base path', async () => {
+  const { assetPath } = await import('../src/lib/assetPath.mjs');
+  assert.equal(assetPath('/images/demo.webp', '/embedded-association-site/'), '/embedded-association-site/images/demo.webp');
+  assert.equal(assetPath('/images/demo.webp', '/'), '/images/demo.webp');
+  assert.equal(assetPath('https://example.com/demo.webp', '/embedded-association-site/'), 'https://example.com/demo.webp');
+  assert.match(read('src/components/Art.tsx'), /assetPath\(image/);
+  assert.match(read('src/components/Cards.tsx'), /assetPath\(m\.image/);
+  assert.match(read('src/pages/About.tsx'), /assetPath\('\/images\/association-group-2024\.webp'/);
+});
