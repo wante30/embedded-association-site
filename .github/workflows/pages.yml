@@ -36,7 +36,9 @@ jobs:
       - name: Verify project-path build
         run: |
           grep -q '/embedded-association-site/assets/' dist/index.html
-          grep -R -q '/embedded-association-site/images/' dist/assets
+          grep -R -q '/embedded-association-site/' dist/assets
+          grep -R -q 'images/' dist/assets
+          ! grep -R -q 'url(/images/' dist/assets
           test -f dist/404.html
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4

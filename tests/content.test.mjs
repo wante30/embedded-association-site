@@ -26,7 +26,14 @@ if (data) {
     for (const x of [...data.projects, ...data.activities, ...data.members, ...data.culture]) {
       if (!x.image) continue;
       assert.ok(x.image.startsWith('/images/'));
-      assert.ok(existsSync(new URL(`../public${x.image}`, import.meta.url)), x.image);
+      const imagePath = new URL(`../public${x.image}`, import.meta.url);
+      assert.ok(existsSync(imagePath), x.image);
+      if (x.image.endsWith('.webp')) {
+        const bytes = readFileSync(imagePath);
+        assert.equal(bytes.subarray(0, 4).toString('ascii'), 'RIFF', x.image);
+        assert.equal(bytes.subarray(8, 12).toString('ascii'), 'WEBP', x.image);
+        assert.equal(bytes.readUInt32LE(4) + 8, bytes.length, `${x.image} has a truncated WebP container`);
+      }
     }
   });
   test('resource links are HTTPS', () => {

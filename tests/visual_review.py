@@ -12,6 +12,7 @@ from pathlib import Path
 import json
 import os
 import shutil
+import socket
 import subprocess
 import time
 import urllib.request
@@ -22,10 +23,23 @@ OUT = Path(os.environ.get('REVIEW_OUTPUT', str(ROOT / 'artifacts/review')))
 OUT.mkdir(parents=True, exist_ok=True)
 INLINE = os.environ.get('INLINE_REVIEW_TEMPLATE')
 TEMPLATE = Path(INLINE).read_text() if INLINE else None
-BASE = os.environ.get('REVIEW_BASE_URL', 'http://127.0.0.1:4173')
+BASE_OVERRIDE = os.environ.get('REVIEW_BASE_URL')
+REVIEW_PORT = int(os.environ.get('REVIEW_PORT', '4173'))
+BASE = BASE_OVERRIDE or f'http://127.0.0.1:{REVIEW_PORT}'
+NPM_COMMAND = 'npm.cmd' if os.name == 'nt' else 'npm'
 ROUTES = ['/', '/about', '/projects', '/awards', '/activities', '/members', '/resources', '/join', '/projects/huishu-2026', '/activities/autumn-training-2024', '/not-found']
 report = {'mode': 'component fixture' if INLINE else 'production build', 'screenshots': [], 'checks': [], 'errors': [], 'limitations': ['Native browser routing and storage are excluded from the component fixture.'] if INLINE else []}
 server = None
+
+def free_port(start):
+    for port in range(start, start + 20):
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
+            try:
+                probe.bind(('127.0.0.1', port))
+            except OSError:
+                continue
+            return port
+    raise RuntimeError(f'No free preview port near {start}')
 
 def check(name, condition):
     if not condition:
@@ -50,7 +64,10 @@ def load(page, route):
 
 try:
     if not INLINE:
-        server = subprocess.Popen(['npm', 'run', 'preview', '--', '--host', '127.0.0.1', '--port', '4173'], cwd=ROOT, stdout=open(OUT/'preview.log', 'w'), stderr=subprocess.STDOUT)
+        if not BASE_OVERRIDE:
+            REVIEW_PORT = free_port(REVIEW_PORT)
+            BASE = f'http://127.0.0.1:{REVIEW_PORT}'
+        server = subprocess.Popen([NPM_COMMAND, 'run', 'preview', '--', '--host', '127.0.0.1', '--port', str(REVIEW_PORT), '--strictPort'], cwd=ROOT, stdout=open(OUT/'preview.log', 'w'), stderr=subprocess.STDOUT)
         for attempt in range(90):
             try:
                 urllib.request.urlopen(BASE, timeout=1)
@@ -137,8 +154,8 @@ try:
             check('browser back restores query category',page.locator('.resource-card').count()==2)
             page.goto(BASE+'/activities/autumn-training-2024',wait_until='networkidle')
             page.locator('.activity-art img').evaluate("img => img.src='/intentionally-missing-test-image.webp'")
-            page.locator('.activity-art svg').wait_for()
-            check('missing activity photo falls back without broken image',page.locator('.activity-art img').count()==0)
+            page.locator('.media-unavailable').wait_for()
+            check('missing real activity photo is explicitly unavailable',page.locator('.activity-art img').count()==0 and page.locator('.activity-art svg').count()==0)
         page.set_viewport_size({'width':390,'height':844})
         load(page,'/projects/huishu-2026')
         check('mobile system diagram is a continuous vertical flow',page.locator('.system-flow').evaluate("el => getComputedStyle(el).flexDirection === 'column'"))
@@ -151,7 +168,7 @@ try:
         check('Escape closes mobile dialog',not page.locator('dialog').is_visible())
         check('closing dialog restores scrolling',page.evaluate('document.body.style.overflow')!='hidden')
         page.get_by_role('button',name='打开导航菜单').click()
-        page.locator('dialog a[href="/projects"]').click()
+        page.locator('dialog a[href$="/projects"]').click()
         page.locator('.project-grid').wait_for()
         check('mobile navigation changes the page',page.locator('.collection-page').count()==1)
         check('mobile navigation closes dialog',not page.locator('dialog').is_visible())

@@ -68,8 +68,8 @@ export function ActivityArt({ kind, image = '', alt = '', example = true }: { ki
   const showImage = Boolean(image && failed !== image);
   const resolvedImage = assetPath(image, import.meta.env.BASE_URL || '/');
   return <div className={`activity-art activity-art--${kind}`}>
-    {showImage ? <img src={resolvedImage} alt={alt || '活动图片'} loading="lazy" onError={() => setFailed(image)}/> : kind === 'community' ? <ProjectArt kind="robot"/> : <WorkshopArt/>}
-    <span className="image-caption">{showImage ? (example ? '场景示意' : '活动照片') : '概念示意'}</span>
+    {showImage ? <img src={resolvedImage} alt={alt || '活动图片'} loading="lazy" onError={() => setFailed(image)}/> : !example ? <div className="media-unavailable"><span>活动记录</span><p>照片待补充</p></div> : kind === 'community' ? <ProjectArt kind="robot"/> : <WorkshopArt/>}
+    {(showImage || example) && <span className="image-caption">{showImage ? (example ? '场景示意' : '活动照片') : '概念示意'}</span>}
   </div>;
 }
 

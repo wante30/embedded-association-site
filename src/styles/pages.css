@@ -1,6 +1,6 @@
 /* Home: image, typography and compact reference-led sections */
 .home-hero { position: relative; isolation: isolate; overflow: hidden; background: #06141f; color: #f3f8fc; min-height: 584px; }
-.hero-photo { position: absolute; z-index: -2; inset: 0 0 0 31%; background: url('/images/hero-focus.webp') center / cover no-repeat; filter: saturate(.7) contrast(1.15); opacity: .9; }
+.hero-photo { position: absolute; z-index: -2; inset: 0 0 0 31%; background-position: center; background-size: cover; background-repeat: no-repeat; filter: saturate(.7) contrast(1.15); opacity: .9; }
 .hero-vignette { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg,#06141f 0%,#06141ff5 23%,#06141fc0 41%,#06141f0a 75%),linear-gradient(0deg,#06141f 0%,transparent 30%,#08172122 80%); }
 .hero-content { padding-top: 73px; padding-bottom: 93px; }
 .hero-eyebrow { display: flex; gap: 10px; align-items: center; color: #93acbc; font-size: 11px; letter-spacing: .06em; }
