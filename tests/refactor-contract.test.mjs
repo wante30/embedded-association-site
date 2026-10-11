@@ -18,5 +18,7 @@ test('runtime media paths respect the deployment base path', async () => {
   assert.equal(assetPath('https://example.com/demo.webp', '/embedded-association-site/'), 'https://example.com/demo.webp');
   assert.match(read('src/components/Art.tsx'), /assetPath\(image/);
   assert.match(read('src/components/Cards.tsx'), /assetPath\(m\.image/);
-  assert.match(read('src/pages/About.tsx'), /assetPath\('\/images\/association-group-2024\.webp'/);
+  assert.match(read('src/pages/About.tsx'), /assetPath\('\/images\/association-group-2024\.jpg'/);
+  assert.match(read('src/pages/Home.tsx'), /assetPath\('\/images\/hero-focus\.webp'/);
+  assert.doesNotMatch(read('src/styles/pages.css'), /url\(['"]?\/images\//);
 });

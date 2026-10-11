@@ -1,8 +1,6 @@
-# 单片机与嵌入式技术协会网站
+# 单片机与嵌入式协会网站
 
-以已确认的深蓝与白色视觉稿为基准，完整重构的静态官网。桌面与手机均有专门布局；不需要服务器、数据库、登录或付费 API。
-
-> 当前为**视觉预览 / 示例内容版本**。项目、活动、荣誉和成员信息均有示例标识。不要把示例当作协会真实经历；发布前请核实资料、替换真实图片并取得人物授权。
+哈尔滨理工大学计算机科学与技术学院单片机与嵌入式协会的静态官网。网站展示已确认适合公开的协会介绍、项目、活动、竞赛记录、成员角色和学习资源；不需要服务器、数据库、登录或付费 API。
 
 ## 运行与构建
 
@@ -27,8 +25,10 @@ src/
   components/         布局、导航、卡片、SVG 概念图和通用组件
   pages/              各主页面与详情、404 页面
   lib/router.tsx      站内历史导航适配，保留真实链接语义
+  lib/basePath.mjs    GitHub Pages 项目子路径的路由处理
+  lib/assetPath.mjs   GitHub Pages 项目子路径的媒体资源处理
   styles/             设计变量、基础、组件与页面样式
-public/images/        本地 WebP 场景素材
+public/images/        本地照片与概念素材（WebP / JPEG）
 public/_redirects     Cloudflare Pages 的 SPA 回退
 public/_headers       基础安全与缓存响应头
 public/favicon.svg    网站图标
@@ -38,9 +38,9 @@ public/favicon.svg    网站图标
 
 ## 内容与照片维护
 
-大部分内容修改 `src/content/site.json`。未核实内容保留 `example: true`；删除全部示例或换成核实资料后，再调整预览声明。`site.preview` 目前只是内容状态记录，不会自动取消页面上的说明，这是有意保留的发布保护。
+大部分内容修改 `src/content/site.json`。只填写已确认、适合公开的信息；暂时缺失的资料留空或标记为待补充，不用猜测补齐。`site.preview` 保留为内容状态字段，当前公开记录均应与可核对材料一致。
 
-项目、活动、成员都有 `image` 字段。真实素材放到 `public/images/`，再填写例如 `/images/my-project.webp`。`image` 为空时展示现有概念图或中性人物占位；图片失效也有回退。只上传有权公开的图片，不把示意图描述成协会实拍。
+项目、活动、成员都有 `image` 字段。真实素材放到 `public/images/`，再填写例如 `/images/my-project.webp`；运行时会自动追加部署 base path。`image` 为空时展示现有概念图或中性人物占位；图片失效也有回退。只上传有权公开的图片，不把示意图描述成协会实拍。
 
 项目对应 `projects[].art` 的 `home`、`robot`、`vision` 概念插图。活动对应 `board`、`lab`、`community`。修改项目信息后，首页、列表与详情自动同步。首页统计来自内容数量，没有虚构人数和奖项数量。
 
@@ -48,17 +48,15 @@ public/favicon.svg    网站图标
 
 ## 发布前检查
 
-1. 核实协会正式名称、学校归属、指导教师和成员授权。
-2. 替换示例项目、活动、荣誉；不要仅删除提示文字而保留虚构数据。
-3. 在 `index.html` 与 `public/robots.txt` 移除预览版的禁止索引设置，补充实际域名的 canonical、Open Graph URL 与 sitemap。不预填不存在的域名。
+1. 核实新增项目、活动、荣誉和成员信息，并确认照片公开授权。
+2. 运行 `npm test`、`npm run build` 和 `python tests/visual_review.py`。
+3. Pages 发布构建必须使用 `/embedded-association-site/` base，并检查 `dist/404.html` 与图片路径。
 4. 如申请学校子域名，先确认学校对托管位置与内容审核的要求。本项目没有代替学校审批。
 5. 在真实校园网和常用运营商环境测试访问。
 
-## Cloudflare Pages
+## GitHub Pages
 
-构建命令：`npm run build`。输出目录：`dist`。Node.js：22。保留 `public/_redirects`，使详情地址刷新时回退到 SPA，再由站内路由显示对应内容或 404。
-
-当前重构位于独立分支 `redesign/reference-ui-v1`。预览部署取决于项目是否启用分支预览；本仓库不会自动替你更改 Cloudflare 账户设置。
+`.github/workflows/pages.yml` 在 `master` 更新时安装锁定依赖、运行内容回归测试，并以 `/embedded-association-site/` 为 base 构建；随后复制 `dist/index.html` 为 `dist/404.html`，上传并部署 Pages artifact。路由和运行时图片都经过 base-aware 处理，详情地址刷新时由 Pages fallback 回到应用路由。`public/_redirects` 仍可供其他静态托管环境使用。
 
 ## 自动测试与截图验收
 

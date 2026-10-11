@@ -162,7 +162,7 @@
       "title": "2024 秋季第一次技术培训",
       "category": "技术培训",
       "summary": "从协会方向和基础实践出发，开展集中培训与技术交流。",
-      "image": "/images/association-training-2024.webp",
+      "image": "/images/association-training-2024.jpg",
       "art": "lab",
       "duration": "2024 秋",
       "example": false,
@@ -179,7 +179,7 @@
       "title": "2024 协会纳新",
       "category": "纳新活动",
       "summary": "在校园现场介绍协会方向、学习资源与项目实践，和新同学面对面交流。",
-      "image": "/images/association-recruitment-2024.webp",
+      "image": "/images/association-recruitment-2024.jpg",
       "art": "community",
       "duration": "2024 纳新",
       "example": false,
@@ -196,7 +196,7 @@
       "title": "2025 春季蓝桥杯单片机培训",
       "category": "竞赛训练",
       "summary": "围绕蓝桥杯单片机基础技能与典型赛题开展集中训练。",
-      "image": "/images/association-training-2025.webp",
+      "image": "/images/association-training-2025.jpg",
       "art": "board",
       "duration": "2025 春",
       "example": false,
@@ -214,19 +214,19 @@
       "id": "practice",
       "title": "动手实践",
       "text": "在真实问题中，理解每一行代码。",
-      "image": "/images/association-training-2024.webp"
+      "image": "/images/association-training-2024.jpg"
     },
     {
       "id": "share",
       "title": "开放分享",
       "text": "把经验留下，让后来的人少走弯路。",
-      "image": "/images/association-training-2025.webp"
+      "image": "/images/association-training-2025.jpg"
     },
     {
       "id": "together",
       "title": "一起成长",
       "text": "不同的专长，在同一个项目里相遇。",
-      "image": "/images/association-group-2024.webp"
+      "image": "/images/association-group-2024.jpg"
     }
   ],
   "awards": [

@@ -190,4 +190,7 @@
 
 /* Real photographs can replace vector concepts without changing layout. */
 .media-photo { object-fit: cover; }
+.media-unavailable { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; width: 100%; height: 100%; background: var(--surface-soft); color: var(--muted); }
+.media-unavailable > span { font-size: 11px; letter-spacing: .12em; }
+.media-unavailable > p { font-size: 15px; }
 .member-portrait > img { width: 100%; height: 100%; object-fit: cover; }
