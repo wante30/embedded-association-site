@@ -234,14 +234,54 @@
   ],
   "awards": [
     {
+      "id": "iot-national-2026-wang",
+      "year": "2026",
+      "name": "2026 年全国大学生物联网设计竞赛全国总决赛",
+      "level": "国家级",
+      "award": "一等奖",
+      "team": "王景钰 · 刘凯 · 王迁皓",
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "craic-appliance-2026",
+      "year": "2026",
+      "name": "第二十八届中国机器人及人工智能大赛全国总决赛",
+      "level": "国家级",
+      "award": "智能家电创新赛一等奖",
+      "team": "王景钰 · 周天 · 刘凯",
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "lanqiao-national-2026-cai",
+      "year": "2026",
+      "name": "第十七届蓝桥杯全国大学生软件和信息技术大赛电子赛",
+      "level": "国家级",
+      "award": "单片机设计与开发大学组全国总决赛一等奖",
+      "team": "蔡永胜",
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "lanqiao-national-2026-sun",
+      "year": "2026",
+      "name": "第十七届蓝桥杯全国大学生软件和信息技术大赛电子赛",
+      "level": "国家级",
+      "award": "单片机设计与开发大学组全国总决赛三等奖",
+      "team": "孙裕杰",
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
       "id": "raicom-national-2026",
       "year": "2026",
       "name": "2026 睿抗机器人开发者大赛（RAICOM）全国总决赛",
       "level": "国家级",
       "award": "视觉系统创新竞赛项目三等奖",
       "team": "孔宇熙 · 祖力喀尔·艾斯卡尔 · 田思娴",
-      "advisor": "石春源",
-      "example": false
+      "example": false,
+      "sourceLabel": "获奖证书"
     },
     {
       "id": "iot-ne-2026",
@@ -249,9 +289,9 @@
       "name": "2026 年全国大学生物联网设计竞赛东北赛区",
       "level": "赛区",
       "award": "二等奖",
-      "team": "祖力喀尔·艾斯卡尔 · 梁荣凯 · 霍钰楷",
-      "advisor": "黄志若",
-      "example": false
+      "team": "祖力喀尔·艾斯卡尔 · 梁荣凯 · 霍钫楷",
+      "example": false,
+      "sourceLabel": "获奖证书"
     },
     {
       "id": "opto-ne-2026",
@@ -259,29 +299,99 @@
       "name": "第十四届全国大学生光电设计竞赛东北区赛",
       "level": "赛区",
       "award": "创意组二等奖",
-      "team": "祖力喀尔·艾斯卡尔 · 梁荣凯 · 霍钰楷",
-      "advisor": "黄志若",
-      "example": false
+      "team": "祖力喀尔 · 梁荣凯 · 霍钫楷",
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "statistics-heilongjiang-2026",
+      "year": "2026",
+      "name": "2026 年（第十二届）全国大学生统计建模大赛黑龙江赛区选拔赛",
+      "level": "省级",
+      "award": "本科生组一等奖",
+      "team": "林洋 · 王景钰 · 张乾雯",
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "lanqiao-embedded-2026-wang",
+      "year": "2026",
+      "name": "第十七届蓝桥杯全国大学生软件和信息技术大赛电子赛",
+      "level": "省级",
+      "award": "嵌入式设计与开发大学组黑龙江赛区一等奖",
+      "team": "王景钰",
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "lanqiao-province-2026-cai",
+      "year": "2026",
+      "name": "第十七届蓝桥杯全国大学生软件和信息技术大赛电子赛",
+      "level": "省级",
+      "award": "单片机设计与开发大学组黑龙江赛区一等奖",
+      "team": "蔡永胜",
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "lanqiao-province-2026-he",
+      "year": "2026",
+      "name": "第十七届蓝桥杯全国大学生软件和信息技术大赛电子赛",
+      "level": "省级",
+      "award": "单片机设计与开发大学组黑龙江赛区二等奖",
+      "team": "贺嘉兴",
+      "example": false,
+      "sourceLabel": "获奖证书"
     },
     {
       "id": "raicom-heilongjiang-2026",
       "year": "2026",
       "name": "2026 睿抗机器人开发者大赛（RAICOM）黑龙江赛区",
       "level": "省级",
-      "award": "视觉系统创新竞赛项目三等奖",
+      "award": "视觉系统创新竞赛项目二等奖",
       "team": "祖力喀尔·艾斯卡尔 · 孔宇熙 · 田思娴",
-      "advisor": "石春源",
-      "example": false
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "lanqiao-province-2026-zeng",
+      "year": "2026",
+      "name": "第十七届蓝桥杯全国大学生软件和信息技术大赛电子赛",
+      "level": "省级",
+      "award": "单片机设计与开发大学组黑龙江赛区三等奖",
+      "team": "曾智豪",
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "lanqiao-province-2026-xiong",
+      "year": "2026",
+      "name": "第十七届蓝桥杯大赛电子赛省赛",
+      "level": "省级",
+      "award": "单片机设计与开发大学组三等奖",
+      "team": "熊舒钰珏",
+      "example": false,
+      "sourceLabel": "成绩截图"
     },
     {
       "id": "lanqiao-mcu-2026",
       "year": "2026",
-      "name": "第十七届蓝桥杯全国软件和信息技术专业人才大赛电子赛",
+      "name": "第十七届蓝桥杯全国大学生软件和信息技术大赛电子赛",
       "level": "省级",
       "award": "单片机设计与开发大学组黑龙江赛区三等奖",
       "team": "高嘉睿",
-      "advisor": "姜宇东",
-      "example": false
+      "example": false,
+      "sourceLabel": "获奖证书"
+    },
+    {
+      "id": "mathmodel-campus-2026",
+      "year": "2026",
+      "name": "2026 年哈尔滨理工大学数学建模竞赛校赛",
+      "level": "校级",
+      "award": "一等奖",
+      "team": "钟德成 · 井琦 · 王承粲",
+      "example": false,
+      "sourceLabel": "成绩截图"
     }
   ],
   "members": [
