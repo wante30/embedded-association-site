@@ -5,13 +5,14 @@
   --surface: #ffffff;
   --surface-soft: #edf3f8;
   --ink: #142535;
-  --muted: #647586;
-  --faint: #738493;
+  --muted: #526779;
+  --faint: #607586;
   --line: #e0e8ef;
   --blue: #246bfd;
   --blue-hover: #1458db;
   --blue-soft: #edf4ff;
   --cyan: #88d9ff;
+  --award: #82551f;
   --navy: #071622;
   --navy-soft: #102634;
   --radius: 12px;
@@ -30,5 +31,6 @@
   --blue: #7ac9ff;
   --blue-hover: #b2e5ff;
   --blue-soft: #153347;
+  --award: #e1b575;
   --shadow: 0 8px 24px rgba(0,0,0,.07);
 }

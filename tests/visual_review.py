@@ -62,6 +62,14 @@ def check(name, condition):
         raise AssertionError(name)
     report['checks'].append(name)
 
+def check_touch_targets(name, locator):
+    targets = locator.evaluate_all('''elements => elements.map(el => {
+        const rect = el.getBoundingClientRect();
+        return {name: el.getAttribute('aria-label') || el.textContent.trim(), width: rect.width, height: rect.height};
+    }).filter(rect => rect.width > 0 && rect.height > 0)''')
+    undersized = [target for target in targets if target['width'] < 44 or target['height'] < 44]
+    check(f'{name}: primary touch targets are at least 44px' + (f' {undersized}' if undersized else ''), bool(targets) and not undersized)
+
 def load(page, route):
     if TEMPLATE:
         if page.evaluate('typeof window.__reviewNavigate === "function"'):
@@ -108,7 +116,9 @@ try:
                 check(f'{label} {route}: no horizontal overflow', page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 check(f'{label} {route}: images loaded', page.evaluate('Array.from(document.images).every(img => img.complete && img.naturalWidth > 0)'))
                 check(f'{label} {route}: images decode', page.evaluate('async () => (await Promise.all(Array.from(document.images, img => img.decode().then(() => true, () => false)))).every(Boolean)'))
-                expected = ([p['image'] for p in CONTENT['projects'] if p['image']] if route in ['/', '/projects'] else []) + ([a['image'] for a in CONTENT['activities'] if a['image']] if route in ['/', '/activities'] else [])
+                displayed_projects = CONTENT['projects'][:1] if route == '/' else CONTENT['projects'] if route == '/projects' else []
+                expected = [project['image'] for project in displayed_projects if project['image']]
+                expected += [a['image'] for a in CONTENT['activities'] if a['image']] if route in ['/', '/activities'] else []
                 expected += [entry['image'] for group in ['projects', 'activities'] for entry in CONTENT[group] if route == f'/{group}/{entry["id"]}' and entry['image']]
                 if route == '/about':
                     expected.append('/images/association-group-2024.jpg')
@@ -161,6 +171,13 @@ try:
         check('FAQ closes',first.get_attribute('open') is None)
         check('missing signup cannot collect data',page.get_by_role('button',name='纳新群筹备中').is_disabled())
         check('no fake submission form',page.locator('form').count()==0)
+        for project in CONTENT['projects']:
+            load(page,'/')
+            entry = page.locator(f'main a[href$="/projects/{project["id"]}"]').first
+            check(f'home: {project["name"]} has a project entry', entry.count() == 1 and entry.is_visible())
+            entry.click()
+            page.get_by_role('heading',name=project['name'],exact=True).wait_for()
+            check(f'home: {project["name"]} entry opens its detail', page.locator('h1').inner_text() == project['name'])
         load(page,'/')
         page.get_by_role('button',name='切换深色模式').click()
         check('dark mode changes theme',page.locator('html').get_attribute('data-theme')=='dark')
@@ -169,7 +186,7 @@ try:
             page.reload(wait_until='networkidle')
             check('dark mode persists across reloads',page.locator('html').get_attribute('data-theme')=='dark')
             page.get_by_role('button',name='切换浅色模式').click()
-            page.get_by_role('link',name='查看项目',exact=True).click()
+            page.get_by_role('navigation',name='主导航',exact=True).get_by_role('link',name='项目',exact=True).click()
             check('native history navigation',page.url.endswith('/projects'))
             page.go_back(wait_until='networkidle')
             check('native back returns home',page.url.endswith('/'))
@@ -192,25 +209,85 @@ try:
             page.locator('.detail-visual img').evaluate('(img, url) => img.src=url', BASE + '/intentionally-missing-project-image.webp')
             page.locator('.detail-visual .media-unavailable').wait_for()
             check('missing real project image never becomes a concept SVG', page.locator('.detail-visual img, .detail-visual svg.project-art').count()==0)
-        page.set_viewport_size({'width':390,'height':844})
-        load(page,'/projects/huishu-2026')
-        check('mobile system diagram is a continuous vertical flow',page.locator('.system-flow').evaluate("el => getComputedStyle(el).flexDirection === 'column'"))
-        load(page,'/')
-        page.get_by_role('button',name='打开导航菜单').click()
-        check('mobile dialog opens',page.locator('dialog').is_visible())
-        check('mobile dialog locks background scroll',page.evaluate('document.body.style.overflow')=='hidden')
-        page.screenshot(path=str(OUT/'mobile-navigation.png'))
-        page.keyboard.press('Escape')
-        check('Escape closes mobile dialog',not page.locator('dialog').is_visible())
-        check('closing dialog restores scrolling',page.evaluate('document.body.style.overflow')!='hidden')
-        page.get_by_role('button',name='打开导航菜单').click()
-        page.locator('dialog a[href$="/projects"]').click()
-        page.locator('.project-grid').wait_for()
-        check('mobile navigation changes the page',page.locator('.collection-page').count()==1)
-        check('mobile navigation closes dialog',not page.locator('dialog').is_visible())
         context.close()
+        for width, height in [(320,568), (390,844)]:
+            context = browser.new_context(viewport={'width':width,'height':height}, device_scale_factor=1, is_mobile=True, has_touch=True, locale='zh-CN', reduced_motion='reduce')
+            page = context.new_page()
+            label = f'touch {width}px'
+            load(page,'/')
+            check_touch_targets(f'{label} header', page.locator('.site-header button'))
+            check_touch_targets(f'{label} hero', page.locator('.hero-actions a'))
+            check(f'{label}: circuit visual has a visible area separate from text', page.locator('.hero-visual').evaluate('''visual => {
+                const rect = visual.getBoundingClientRect();
+                const content = document.querySelector('.hero-content').getBoundingClientRect();
+                return rect.width > 0 && rect.height > 0 && rect.left >= 0 && rect.right <= innerWidth
+                    && (rect.top >= content.bottom || rect.bottom <= content.top);
+            }'''))
+            name = f'mobile-{width}-home-viewport.png'
+            page.screenshot(path=str(OUT/name), animations='disabled')
+            report['screenshots'].append({'route':'/','width':width,'height':height,'file':name})
+            page.locator('.hero-visual').scroll_into_view_if_needed()
+            name = f'mobile-{width}-circuit.png'
+            page.screenshot(path=str(OUT/name), animations='disabled')
+            report['screenshots'].append({'route':'/','width':width,'height':height,'file':name})
+            page.evaluate('window.scrollTo(0, 0)')
+            menu = page.get_by_role('button',name='打开导航菜单')
+            menu.tap()
+            dialog = page.get_by_role('dialog',name='网站导航')
+            check(f'{label}: mobile dialog opens', dialog.is_visible())
+            check_touch_targets(f'{label} navigation', dialog.locator('a, button'))
+            scroll_before = page.evaluate('scrollY')
+            page.mouse.move(2, height // 2)
+            page.mouse.wheel(0, 400)
+            page.wait_for_timeout(150)
+            check(f'{label}: mobile dialog locks background scroll', page.evaluate('scrollY') == scroll_before)
+            name = f'mobile-{width}-navigation.png'
+            page.screenshot(path=str(OUT/name), animations='disabled')
+            report['screenshots'].append({'route':'/','width':width,'height':height,'file':name})
+            page.keyboard.press('Escape')
+            check(f'{label}: Escape closes mobile dialog', not dialog.is_visible())
+            check(f'{label}: Escape restores menu focus', menu.evaluate('el => el === document.activeElement'))
+            page.mouse.wheel(0, 400)
+            page.wait_for_function('(previous) => scrollY > previous', arg=scroll_before)
+            check(f'{label}: closing dialog restores scrolling', page.evaluate('scrollY') > scroll_before)
+            menu.tap()
+            page.get_by_role('button',name='关闭导航菜单').tap()
+            check(f'{label}: close button closes mobile dialog', not dialog.is_visible())
+            check(f'{label}: close button restores menu focus', menu.evaluate('el => el === document.activeElement'))
+            menu.tap()
+            dialog.locator('a[href$="/join"]').tap()
+            page.locator('h1').wait_for()
+            check(f'{label}: final navigation item is reachable', page.get_by_role('button',name='纳新群筹备中').is_disabled())
+            check(f'{label}: navigation closes the dialog', not dialog.is_visible())
+            menu.tap()
+            dialog.locator('a[href$="/projects"]').tap()
+            page.locator('.project-grid').wait_for()
+            check(f'{label}: mobile navigation changes the page', page.locator('.collection-page').count() == 1)
+            check(f'{label}: project navigation closes the dialog', not dialog.is_visible())
+            for route in ['/projects', '/resources', '/activities', '/awards', '/members']:
+                load(page, route)
+                check_touch_targets(f'{label} {route} filters', page.get_by_role('group',name='分类筛选').get_by_role('button'))
+                search = page.get_by_role('searchbox')
+                if search.count():
+                    check(f'{label} {route}: search text is at least 16px', search.evaluate('el => parseFloat(getComputedStyle(el).fontSize) >= 16'))
+                    search.fill('test')
+                    clear = page.get_by_role('button',name='清空搜索')
+                    check_touch_targets(f'{label} {route} search clear', clear)
+                    clear.tap()
+                    check(f'{label} {route}: search clear works by touch', search.input_value() == '')
+            load(page, '/projects/huishu-2026')
+            nodes = page.locator('.system-flow > *')
+            architecture = CONTENT['projects'][0]['architecture']
+            check(f'{label}: system groups retain all published content in order', nodes.count() == len(architecture) and all(expected in actual for expected, actual in zip(architecture, nodes.all_text_contents())))
+            check(f'{label}: system groups fit without overlapping', nodes.evaluate_all('''nodes => {
+                const rects = nodes.map(node => node.getBoundingClientRect());
+                return rects.every(rect => rect.width > 0 && rect.height > 0 && rect.left >= 0 && rect.right <= innerWidth)
+                    && rects.every((rect, i) => rects.slice(i + 1).every(other =>
+                        rect.right <= other.left || other.right <= rect.left || rect.bottom <= other.top || other.bottom <= rect.top));
+            }'''))
+            context.close()
         # Probe breakpoints in fresh contexts; avoid fixture unmount residue.
-        for width in [360,768,1024,1920]:
+        for width in [320,360,768,1024,1920]:
             for route in ROUTES[:-1]:
                 context=browser.new_context(viewport={'width':width,'height':1000},locale='zh-CN',reduced_motion='reduce')
                 page=context.new_page()
