@@ -129,6 +129,15 @@ try:
                     check(f'{label} {route}: images and internal links stay under deployment prefix', page.locator('img, a[href]').evaluate_all('(elements, prefix) => elements.every(el => { const url = new URL(el.currentSrc || el.href); return url.origin !== location.origin || url.pathname.startsWith(prefix); })', prefix))
                 if route == '/':
                     check(f'{label}: hero background decodes', page.locator('.hero-photo').evaluate('async el => { const url = getComputedStyle(el).backgroundImage.slice(5, -2); const img = new Image(); img.src = url; try { await img.decode(); return true; } catch { return false; } }'))
+                if route in ['/', '/about']:
+                    preview = page.get_by_role('region', name='竞赛荣誉', exact=True)
+                    published = [award for award in CONTENT['awards'] if not award['example']]
+                    cards = preview.locator('.award-preview-card')
+                    check(f'{label} {route}: representative awards follow published records', cards.count() == min(3, len(published)) and all(
+                        all(value in cards.nth(i).inner_text() for value in [award['year'], award['level'], award['name'], award['award'], award['team']])
+                        for i, award in enumerate(published[:3])))
+                    check(f'{label} {route}: award totals are current', preview.locator('.awards-preview__heading p').inner_text() == f"已公开 {len(published)} 项竞赛记录，其中 {sum(award['level']=='国家级' for award in published)} 项国家级记录。")
+                    check(f'{label} {route}: award preview omits advisor information', '指导教师' not in preview.inner_text())
                 check(f'{label} {route}: no browser errors', not errors)
                 slug = route.strip('/').replace('/','-') or 'home'
                 name = f'{label}-{slug}.png'
@@ -241,6 +250,19 @@ try:
             load(page,'/')
             check_touch_targets(f'{label} header', page.locator('.site-header button'))
             check_touch_targets(f'{label} hero', page.locator('.hero-actions a'))
+            page.locator('.hero-actions').get_by_role('link', name='竞赛荣誉', exact=True).tap()
+            check(f'{label}: home hero opens all awards without the menu', page.locator('.award-card').count() == len(CONTENT['awards']))
+            load(page, '/about')
+            check_touch_targets(f'{label} about introduction', page.locator('.about-actions a'))
+            page.locator('.about-actions').get_by_role('link', name='查看竞赛荣誉', exact=True).tap()
+            check(f'{label}: about introduction opens all awards without the menu', page.locator('.award-card').count() == len(CONTENT['awards']))
+            for route in ['/', '/about']:
+                load(page, route)
+                preview = page.get_by_role('region', name='竞赛荣誉', exact=True)
+                check_touch_targets(f'{label} {route} award preview', preview.get_by_role('link', name='查看全部荣誉', exact=True))
+                preview.get_by_role('link', name='查看全部荣誉', exact=True).tap()
+                check(f'{label} {route}: preview opens the complete records', page.locator('.award-card').count() == len(CONTENT['awards']))
+            load(page, '/')
             check(f'{label}: circuit visual has a visible area separate from text', page.locator('.hero-visual').evaluate('''visual => {
                 const rect = visual.getBoundingClientRect();
                 const content = document.querySelector('.hero-content').getBoundingClientRect();
