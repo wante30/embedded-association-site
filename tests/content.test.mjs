@@ -14,7 +14,12 @@ if (data) {
     assert.equal(data.site.advisor, '高俊锋');
     assert.equal(data.site.preview, false);
   });
-  test('six directions have unique identifiers', () => { assert.equal(data.directions.length, 6); assert.equal(new Set(data.directions.map(x => x.id)).size, 6); });
+  test('practice directions have unique identifiers and valid resource categories', () => {
+    assert.equal(new Set(data.directions.map(x => x.id)).size, data.directions.length);
+    const categories = new Set(['全部', ...data.resources.map(resource => resource.category)]);
+    for (const direction of data.directions) assert.ok(categories.has(direction.resourceCategory), direction.id);
+    assert.ok(data.directions.some(direction => direction.id === 'fpga' && direction.resourceCategory === 'FPGA'));
+  });
   for (const group of ['projects', 'activities', 'awards', 'members']) {
     test(`${group}: published entries are real records`, () => {
       assert.ok(data[group].length > 0);

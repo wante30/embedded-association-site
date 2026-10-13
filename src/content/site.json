@@ -6,7 +6,7 @@
     "college": "计算机科学与技术学院",
     "englishName": "MCU & EMBEDDED ASSOCIATION",
     "tagline": "让代码驱动硬件，让创意真正运行。",
-    "description": "成立于 2024 年，面向嵌入式、物联网、电子设计与边缘智能方向，在动手、分享与协作中把想法做成真实系统。",
+    "description": "成立于 2024 年，主要面向集成电路专业学生，围绕数字电路、FPGA 与嵌入式系统开展学习与实践。",
     "founded": "2024",
     "location": "实训楼 501",
     "advisor": "高俊锋",
@@ -14,16 +14,27 @@
     "github": "https://github.com/wante30/embedded-association-site",
     "recruitmentUrl": "",
     "email": "",
-    "preview": false
+    "preview": false,
+    "audience": "主要面向集成电路专业学生，欢迎对数字电路、FPGA 与嵌入式系统感兴趣的同学参与。"
   },
   "directions": [
+    {
+      "id": "fpga",
+      "icon": "circuit",
+      "name": "FPGA 与数字电路",
+      "en": "DIGITAL DESIGN / FPGA",
+      "description": "从逻辑设计、HDL 仿真到时序分析与板级验证",
+      "tags": "Verilog · 仿真验证 · 时序约束",
+      "resourceCategory": "FPGA"
+    },
     {
       "id": "embedded",
       "icon": "cpu",
       "name": "嵌入式开发",
       "en": "EMBEDDED",
       "description": "从底层驱动到实时系统",
-      "tags": "STM32 · ESP32 · RTOS"
+      "tags": "STM32 · ESP32 · RTOS",
+      "resourceCategory": "嵌入式"
     },
     {
       "id": "iot",
@@ -31,7 +42,8 @@
       "name": "物联网",
       "en": "INTERNET OF THINGS",
       "description": "连接设备，也连接真实场景",
-      "tags": "MQTT · Wi-Fi · AIoT"
+      "tags": "MQTT · Wi-Fi · AIoT",
+      "resourceCategory": "物联网"
     },
     {
       "id": "ai",
@@ -39,7 +51,8 @@
       "name": "边缘智能",
       "en": "EDGE INTELLIGENCE",
       "description": "把感知与推理部署到设备侧",
-      "tags": "YOLO · RKNN · Edge AI"
+      "tags": "YOLO · RKNN · Edge AI",
+      "resourceCategory": "人工智能"
     },
     {
       "id": "robotics",
@@ -47,7 +60,8 @@
       "name": "机器人",
       "en": "ROBOTICS",
       "description": "让感知、控制与执行形成闭环",
-      "tags": "运动控制 · 机器视觉"
+      "tags": "运动控制 · 机器视觉",
+      "resourceCategory": "全部"
     },
     {
       "id": "electronics",
@@ -55,7 +69,8 @@
       "name": "电子设计",
       "en": "ELECTRONICS",
       "description": "从原理图到真实硬件系统",
-      "tags": "PCB · 焊接 · 硬件调试"
+      "tags": "PCB · 焊接 · 硬件调试",
+      "resourceCategory": "全部"
     },
     {
       "id": "contests",
@@ -63,7 +78,8 @@
       "name": "技术竞赛",
       "en": "ENGINEERING CHALLENGES",
       "description": "在真实赛题里训练工程能力",
-      "tags": "蓝桥杯 · 物联网 · AI"
+      "tags": "蓝桥杯 · 物联网 · AI",
+      "resourceCategory": "全部"
     }
   ],
   "projects": [
@@ -456,6 +472,67 @@
   ],
   "resources": [
     {
+      "id": "pango-pds",
+      "name": "紫光同创 PDS 官方入口",
+      "category": "FPGA",
+      "description": "了解国产 FPGA 从 HDL 描述到综合、布局布线和下载调试的设计流程。",
+      "level": "入门",
+      "tags": [
+        "FPGA",
+        "PDS",
+        "Verilog",
+        "国产 FPGA"
+      ],
+      "url": "https://www.pangomicro.com/product/pds/",
+      "publisher": "紫光同创"
+    },
+    {
+      "id": "vivado-synthesis",
+      "name": "Vivado 综合指南（UG901）",
+      "category": "FPGA",
+      "description": "学习 Verilog / SystemVerilog 的可综合 RTL 写法，理解逻辑描述如何映射为硬件。",
+      "level": "入门",
+      "tags": [
+        "FPGA",
+        "Verilog",
+        "SystemVerilog",
+        "RTL",
+        "综合"
+      ],
+      "url": "https://docs.amd.com/r/en-US/ug901-vivado-synthesis",
+      "publisher": "AMD"
+    },
+    {
+      "id": "vivado-simulation",
+      "name": "Vivado 逻辑仿真指南（UG900）",
+      "category": "FPGA",
+      "description": "从 Testbench 与波形分析开始，先验证设计行为，再进入实现与板级调试。",
+      "level": "入门",
+      "tags": [
+        "FPGA",
+        "Testbench",
+        "仿真",
+        "波形"
+      ],
+      "url": "https://docs.amd.com/r/en-US/ug900-vivado-logic-simulation",
+      "publisher": "AMD"
+    },
+    {
+      "id": "vivado-constraints",
+      "name": "Vivado 约束指南（UG903）",
+      "category": "FPGA",
+      "description": "理解时钟、I/O 与时序约束，学习让实现结果满足设计要求。",
+      "level": "进阶",
+      "tags": [
+        "FPGA",
+        "XDC",
+        "时序约束",
+        "时钟"
+      ],
+      "url": "https://docs.amd.com/r/en-US/ug903-vivado-using-constraints",
+      "publisher": "AMD"
+    },
+    {
       "id": "stm32",
       "name": "STM32 开发入门",
       "category": "单片机",
@@ -589,7 +666,7 @@
   "faq": [
     {
       "question": "没有基础，也可以开始吗？",
-      "answer": "可以。协会的学习资料从单片机开发基础、开发环境和常用外设开始，重点是愿意持续学习、动手验证和与同伴交流。"
+      "answer": "可以。从数字电路与 FPGA 入门路线，或单片机开发环境和常用外设开始；重点是愿意持续学习、动手验证和与同伴交流。"
     },
     {
       "question": "需要自己购买很多硬件吗？",
@@ -602,6 +679,24 @@
     {
       "question": "协会在哪里开展实践？",
       "answer": "协会隶属于哈尔滨理工大学计算机科学与技术学院，主要实践空间位于实训楼 501。"
+    }
+  ],
+  "fpgaLearningPaths": [
+    {
+      "title": "数字电路基础",
+      "topics": "布尔逻辑、组合逻辑、触发器、计数器与状态机"
+    },
+    {
+      "title": "Verilog / SystemVerilog",
+      "topics": "模块接口、组合与时序描述、参数化与 RTL 设计"
+    },
+    {
+      "title": "仿真验证与约束",
+      "topics": "Testbench、波形分析、时钟与复位、引脚约束与时序分析"
+    },
+    {
+      "title": "FPGA 板级实践",
+      "topics": "LED、按键、数码管与串口；综合、实现、下载与板上调试"
     }
   ]
 }
