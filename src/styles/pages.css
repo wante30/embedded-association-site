@@ -87,7 +87,8 @@
 .award-emblem div { position: absolute; width: 170px; height: 170px; border-radius: 50%; border: 1px solid var(--line); box-shadow: 0 0 0 23px var(--surface-soft),0 0 0 24px var(--line); }
 .award-emblem > .icon { position: relative; padding: 5px; }
 .award-emblem span { position: relative; font-size: 6px; letter-spacing: .15em; margin-top: 13px; }
-.awards-timeline { margin-top: 43px; }
+.awards-count { margin-top: 24px; color: var(--muted); font-size: 13px; }
+.awards-timeline { margin-top: 24px; }
 .timeline-year { display: grid; grid-template-columns: 145px minmax(0,1fr); gap: 40px; }
 .year-label { padding-top: 22px; }
 .year-label strong { display: block; font-size: 34px; font-weight: 550; letter-spacing: -.04em; }

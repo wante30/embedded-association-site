@@ -45,4 +45,9 @@ if (data) {
     assert.doesNotMatch(text, /\b1\d{10}\b/);
     assert.doesNotMatch(text, /\b\d{17}[0-9Xx]\b/);
   });
+  test('public awards follow the confirmed publication scope', () => {
+    assert.ok(data.awards.every(award => !Object.hasOwn(award, 'advisor')));
+    assert.ok(!data.awards.some(award => award.id === 'craic-ai-2026'));
+    assert.ok(data.awards.every(award => ['获奖证书', '成绩截图'].includes(award.sourceLabel)));
+  });
 }
