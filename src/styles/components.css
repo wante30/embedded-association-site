@@ -54,9 +54,12 @@
 .empty-state { text-align: center; padding: 70px 20px; width: 100%; color: var(--muted); border: 1px dashed var(--line); border-radius: 12px; }
 .empty-state h2 { font-size: 21px; margin-top: 14px; color: var(--ink); }
 .empty-state p { margin: 12px 0 25px; font-size: 14px; }
-/* The six compact directions from the reference */
-.directions-grid { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 13px; }
+/* Practice directions with an emphasized digital-design entry. */
+.directions-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 13px; }
 .direction-card { display: block; text-align: center; padding: 25px 9px 23px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); box-shadow: var(--shadow); transition: transform .2s, border-color .2s, box-shadow .2s; }
+.direction-card--featured { grid-column: span 2; background: var(--blue-soft); border-color: var(--blue); text-align: left; padding: 28px; }
+.direction-card--featured .direction-icon { justify-content: flex-start; }
+.direction-card--featured h3 { color: var(--blue); font-size: 19px; }
 .direction-card:hover { transform: translateY(-4px); border-color: #7dacf1; box-shadow: 0 9px 25px #125ac610; }
 .direction-icon { color: var(--blue); display: flex; align-items: center; justify-content: center; height: 34px; margin-bottom: 16px; }
 .direction-card h3 { font-size: 15px; margin-bottom: 7px; }
@@ -144,6 +147,7 @@
   .brand small { font-size: 7px; }
   .brand-extra { display: inline; }
   .directions-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .direction-card--featured { grid-column: span 3; }
   .project-grid, .activity-grid { gap: 16px; }
   .project-card h3 { min-height: 45px; }
   .activity-card h3 { min-height: 45px; }
@@ -169,6 +173,7 @@
   .section-heading .text-link { font-size: 13px; min-height: 44px; }
   .directions-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
   .direction-card { padding: 20px 12px; text-align: left; }
+  .direction-card--featured { grid-column: span 2; padding: 22px; }
   .direction-icon { justify-content: flex-start; margin-bottom: 12px; height: 28px; }
   .direction-icon .icon { width: 24px; height: 24px; }
   .direction-card p { font-size: 12px; }

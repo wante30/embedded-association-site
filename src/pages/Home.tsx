@@ -57,7 +57,7 @@ export default function Home() {
     </div></section>
 
     <section className="section home-directions"><div className="container">
-      <SectionTitle eyebrow="LEARN BY BUILDING" title="找到你的实践方向。" description="从一块开发板开始，把知识连成真正运行的系统。" to="/resources" action="学习路线"/>
+      <SectionTitle eyebrow="LEARN BY BUILDING" title="找到你的实践方向。" description="从数字逻辑、HDL 到嵌入式系统，找到适合自己的实践入口。" to="/resources" action="学习路线"/>
       <Directions compact/>
     </div></section>
 
