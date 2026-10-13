@@ -11,35 +11,51 @@ review environments: it excludes native routing and persistent browser storage.
 from pathlib import Path
 import json
 import os
-import shutil
-import socket
-import subprocess
-import time
-import urllib.request
+import threading
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = Path(os.environ.get('REVIEW_OUTPUT', str(ROOT / 'artifacts/review')))
 OUT.mkdir(parents=True, exist_ok=True)
 INLINE = os.environ.get('INLINE_REVIEW_TEMPLATE')
-TEMPLATE = Path(INLINE).read_text() if INLINE else None
+TEMPLATE = Path(INLINE).read_text(encoding='utf-8') if INLINE else None
 BASE_OVERRIDE = os.environ.get('REVIEW_BASE_URL')
-REVIEW_PORT = int(os.environ.get('REVIEW_PORT', '4173'))
-BASE = BASE_OVERRIDE or f'http://127.0.0.1:{REVIEW_PORT}'
-NPM_COMMAND = 'npm.cmd' if os.name == 'nt' else 'npm'
-ROUTES = ['/', '/about', '/projects', '/awards', '/activities', '/members', '/resources', '/join', '/projects/huishu-2026', '/activities/autumn-training-2024', '/not-found']
-report = {'mode': 'component fixture' if INLINE else 'production build', 'screenshots': [], 'checks': [], 'errors': [], 'limitations': ['Native browser routing and storage are excluded from the component fixture.'] if INLINE else []}
+BASE_PATH = '/' + os.environ.get('REVIEW_BASE_PATH', '/').strip('/')
+BASE = (BASE_OVERRIDE or '').rstrip('/')
+CONTENT = json.loads((ROOT / 'src/content/site.json').read_text(encoding='utf-8'))
+MAIN_ROUTES = list(json.loads((ROOT / 'src/content/routes.json').read_text(encoding='utf-8')))
+ROUTES = MAIN_ROUTES + [f'/projects/{p["id"]}' for p in CONTENT['projects']] + [f'/activities/{a["id"]}' for a in CONTENT['activities']] + ['/not-found']
+report = {'mode': 'component fixture' if INLINE else 'deployed site' if BASE_OVERRIDE else 'production build', 'screenshots': [], 'checks': [], 'errors': [], 'limitations': ['Native browser routing and storage are excluded from the component fixture.'] if INLINE else []}
 server = None
 
-def free_port(start):
-    for port in range(start, start + 20):
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as probe:
-            try:
-                probe.bind(('127.0.0.1', port))
-            except OSError:
-                continue
-            return port
-    raise RuntimeError(f'No free preview port near {start}')
+class StaticPreview(SimpleHTTPRequestHandler):
+    """Serve dist under a prefix, without Vite's implicit SPA 200 fallback."""
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, directory=str(ROOT / 'dist'), **kwargs)
+
+    def translate_path(self, path):
+        if BASE_PATH != '/':
+            pathname = urlsplit(path).path
+            if pathname != BASE_PATH and not pathname.startswith(BASE_PATH + '/'):
+                return str(ROOT / 'dist/__outside_deployment__')
+            path = path[len(BASE_PATH):] or '/'
+        return super().translate_path(path)
+
+    def send_error(self, code, message=None, explain=None):
+        if code != 404:
+            return super().send_error(code, message, explain)
+        html = (ROOT / 'dist/404.html').read_bytes()
+        self.send_response(404)
+        self.send_header('Content-Type', 'text/html; charset=utf-8')
+        self.send_header('Content-Length', str(len(html)))
+        self.end_headers()
+        if self.command != 'HEAD':
+            self.wfile.write(html)
+
+    def log_message(self, *args):
+        pass
 
 def check(name, condition):
     if not condition:
@@ -53,7 +69,11 @@ def load(page, route):
         else:
             page.set_content(TEMPLATE.replace('__INITIAL_ROUTE__', json.dumps(route)), wait_until='load')
     else:
-        page.goto(BASE + route, wait_until='networkidle')
+        response = page.goto(BASE + route, wait_until='networkidle')
+        check(f'{route}: HTTP status', response.status == (404 if route == '/not-found' else 200))
+        if route != '/not-found':
+            response = page.reload(wait_until='networkidle')
+            check(f'{route}: reload HTTP 200', response.status == 200)
     page.locator('h1').first.wait_for()
     page.evaluate('document.fonts.ready')
     # Force lazy images to load in the capture only; production stays lazy.
@@ -63,19 +83,14 @@ def load(page, route):
     page.wait_for_timeout(100)
 
 try:
-    if not INLINE:
-        if not BASE_OVERRIDE:
-            REVIEW_PORT = free_port(REVIEW_PORT)
-            BASE = f'http://127.0.0.1:{REVIEW_PORT}'
-        server = subprocess.Popen([NPM_COMMAND, 'run', 'preview', '--', '--host', '127.0.0.1', '--port', str(REVIEW_PORT), '--strictPort'], cwd=ROOT, stdout=open(OUT/'preview.log', 'w'), stderr=subprocess.STDOUT)
-        for attempt in range(90):
-            try:
-                urllib.request.urlopen(BASE, timeout=1)
-                break
-            except Exception:
-                time.sleep(.5)
-        else:
-            raise RuntimeError('Production preview did not start')
+    if not INLINE and not BASE_OVERRIDE:
+        if not (ROOT / 'dist/404.html').exists():
+            raise RuntimeError('Run npm run build before the browser review')
+        server = ThreadingHTTPServer(('127.0.0.1', int(os.environ.get('REVIEW_PORT', '0'))), StaticPreview)
+        worker = threading.Thread(target=server.serve_forever, daemon=True)
+        worker.start()
+        BASE = f'http://127.0.0.1:{server.server_port}' + BASE_PATH.rstrip('/')
+    report['base_url'] = BASE
     with sync_playwright() as p:
         executable = os.environ.get('BROWSER_EXECUTABLE')
         browser = p.chromium.launch(**({'executable_path': executable} if executable else {}), headless=True, args=['--no-sandbox'])
@@ -85,11 +100,24 @@ try:
                 page = context.new_page()
                 errors=[]
                 page.on('pageerror', lambda error: errors.append(str(error)))
-                page.on('console', lambda message: errors.append(message.text) if message.type == 'error' else None)
+                page.on('console', lambda message: errors.append(message.text) if message.type == 'error' and not (route == '/not-found' and '404' in message.text) else None)
+                page.on('response', lambda response: errors.append(f'{response.status} {response.url}') if response.status >= 400 and not (route == '/not-found' and response.request.resource_type == 'document') else None)
                 load(page,route)
                 check(f'{label} {route}: exactly one h1', page.locator('h1').count() == 1)
                 check(f'{label} {route}: no horizontal overflow', page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 check(f'{label} {route}: images loaded', page.evaluate('Array.from(document.images).every(img => img.complete && img.naturalWidth > 0)'))
+                check(f'{label} {route}: images decode', page.evaluate('async () => (await Promise.all(Array.from(document.images, img => img.decode().then(() => true, () => false)))).every(Boolean)'))
+                expected = ([p['image'] for p in CONTENT['projects'] if p['image']] if route in ['/', '/projects'] else []) + ([a['image'] for a in CONTENT['activities'] if a['image']] if route in ['/', '/activities'] else [])
+                expected += [entry['image'] for group in ['projects', 'activities'] for entry in CONTENT[group] if route == f'/{group}/{entry["id"]}' and entry['image']]
+                if route == '/about':
+                    expected.append('/images/association-group-2024.jpg')
+                actual = page.locator('img').evaluate_all('images => images.map(img => img.currentSrc)')
+                check(f'{label} {route}: real images have no silent fallback', all(BASE + src in actual for src in expected) if not INLINE else True)
+                if not INLINE:
+                    prefix = urlsplit(BASE).path.rstrip('/') + '/'
+                    check(f'{label} {route}: images and internal links stay under deployment prefix', page.locator('img, a[href]').evaluate_all('(elements, prefix) => elements.every(el => { const url = new URL(el.currentSrc || el.href); return url.origin !== location.origin || url.pathname.startsWith(prefix); })', prefix))
+                if route == '/':
+                    check(f'{label}: hero background decodes', page.locator('.hero-photo').evaluate('async el => { const url = getComputedStyle(el).backgroundImage.slice(5, -2); const img = new Image(); img.src = url; try { await img.decode(); return true; } catch { return false; } }'))
                 check(f'{label} {route}: no browser errors', not errors)
                 slug = route.strip('/').replace('/','-') or 'home'
                 name = f'{label}-{slug}.png'
@@ -146,14 +174,14 @@ try:
             check('deep-link refresh',page.locator('h1').inner_text()=='慧枢——多模态居家养老协同系统')
             page.goto(BASE+'/resources?category=单片机',wait_until='networkidle')
             check('category deep link selects MCU resources',page.locator('.resource-card').count()==2)
-            page.evaluate("history.pushState(null, '', '/resources?category=人工智能');dispatchEvent(new PopStateEvent('popstate'))")
+            page.evaluate("url => { history.pushState(null, '', url); dispatchEvent(new PopStateEvent('popstate')); }", BASE + '/resources?category=人工智能')
             page.wait_for_function("document.querySelector('.resource-card h2')?.textContent.includes('OpenCV')")
             check('query-only navigation updates resource category',page.locator('.resource-card').count()==2)
             page.go_back(wait_until='networkidle')
             page.wait_for_function("document.querySelector('.resource-card h2')?.textContent.includes('STM32')")
             check('browser back restores query category',page.locator('.resource-card').count()==2)
             page.goto(BASE+'/activities/autumn-training-2024',wait_until='networkidle')
-            page.locator('.activity-art img').evaluate("img => img.src='/intentionally-missing-test-image.webp'")
+            page.locator('.activity-art img').evaluate("(img, url) => img.src=url", BASE + '/intentionally-missing-test-image.webp')
             page.locator('.media-unavailable').wait_for()
             check('missing real activity photo is explicitly unavailable',page.locator('.activity-art img').count()==0 and page.locator('.activity-art svg').count()==0)
         page.set_viewport_size({'width':390,'height':844})
@@ -175,7 +203,7 @@ try:
         context.close()
         # Probe breakpoints in fresh contexts; avoid fixture unmount residue.
         for width in [360,768,1024,1920]:
-            for route in ROUTES[:8]:
+            for route in ROUTES[:-1]:
                 context=browser.new_context(viewport={'width':width,'height':1000},locale='zh-CN',reduced_motion='reduce')
                 page=context.new_page()
                 load(page,route)
@@ -186,6 +214,9 @@ except Exception as e:
     report['errors'].append(str(e))
     raise
 finally:
-    (OUT/'results.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
-    if server: server.terminate()
+    (OUT/'results.json').write_text(json.dumps(report,ensure_ascii=False,indent=2), encoding='utf-8')
+    if server:
+        server.shutdown()
+        server.server_close()
+        worker.join(timeout=5)
     print(json.dumps({'mode':report['mode'],'checks':len(report['checks']),'screenshots':len(report['screenshots']),'errors':report['errors']},ensure_ascii=False))

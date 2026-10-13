@@ -31,8 +31,6 @@ jobs:
         run: npm test
       - name: Build for GitHub Pages project path
         run: npm run build -- --base /embedded-association-site/
-      - name: Add SPA fallback
-        run: cp dist/index.html dist/404.html
       - name: Verify project-path build
         run: |
           grep -q '/embedded-association-site/assets/' dist/index.html
@@ -40,6 +38,8 @@ jobs:
           grep -R -q 'images/' dist/assets
           ! grep -R -q 'url(/images/' dist/assets
           test -f dist/404.html
+          test -f dist/projects/huishu-2026/index.html
+          test -f dist/activities/autumn-training-2024/index.html
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
