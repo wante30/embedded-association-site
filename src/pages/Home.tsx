@@ -5,6 +5,7 @@ import { ProjectArt } from '../components/Art';
 import { ActivityCard } from '../components/Cards';
 import { Directions, JoinBanner, SectionTitle } from '../components/UI';
 import { assetPath } from '../lib/assetPath.mjs';
+import { AwardsPreview } from '../components/AwardsPreview';
 
 export default function Home() {
   // Content order determines the featured project and its earlier work.
@@ -18,7 +19,7 @@ export default function Home() {
         <p className="hero-description">{site.description}</p>
         <div className="hero-actions">
           <Link to="/projects" className="button button--primary">查看项目<Icon name="arrow" size={18}/></Link>
-          <Link to="/about" className="button button--glass">了解协会<Icon name="diagonal" size={17}/></Link>
+          <Link to="/awards" className="button button--glass">竞赛荣誉<Icon name="trophy" size={17}/></Link>
         </div>
       </div>
       <div className="hero-visual">
@@ -33,6 +34,8 @@ export default function Home() {
       <div><dt>实践空间</dt><dd>{site.location}</dd></div>
       <div><dt>指导教师</dt><dd>{site.advisor}</dd></div>
     </dl></section>
+
+    <AwardsPreview/>
 
     <section className="section section--white home-projects"><div className="container">
       <SectionTitle eyebrow="FEATURED PROJECT" title="从想法到系统，持续实践。" to="/projects" action="全部项目"/>
