@@ -30,6 +30,8 @@
 
 ## 证据与边界
 
+本轮将竞赛荣誉入口前移至首页首屏和介绍正文，并在两页简介后展示代表成果。根路径与 Pages 子路径各通过 707 项浏览器检查、生成 36 张报告截图；20 项内容测试和两种构建通过。增加了摘要数据一致性与手机直接进入完整记录的检查，详见 [荣誉入口前移](2026-10-13-awards-visibility.md)。
+
 上一轮（PR #5）根路径与 Pages 子路径各完成 519 项浏览器检查，详见保留的 round2-final-root / round2-final-pages 报告。手机视觉版本（PR #6）的验收目录为 mobile-polish-final-root / mobile-polish-final-pages，报告独立保存，避免混用证据。该版本 19 项 Node 测试与两种 base 的 TypeScript/Vite 构建均通过；两套浏览器验收各完成 646 项检查、36 张报告内截图及单独的深色首页截图，errors 均为空。
 
 荣誉版本（PR #7）：20 项 Node 测试、两种 base 构建均通过；awards-final-root / awards-final-pages 各 657 项浏览器检查、36 张报告内截图及单独深色首页截图，errors 均为空。新增荣誉搜索、校级筛选、公开字段范围和教师信息省略检查。材料核对见 [荣誉发布记录](2026-10-13-awards.md)。
