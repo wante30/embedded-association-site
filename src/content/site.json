@@ -78,14 +78,14 @@
       "tags": [
         "ESP32-S3",
         "ESP32-P4",
-        "RK3588",
+        "RK3588S",
         "MCP",
         "Home Assistant"
       ],
       "status": "系统集成验证完成",
       "example": false,
       "period": "2026 · 全国大学生物联网设计竞赛",
-      "team": "王景钰 · 刘凯 · 王迁皓",
+      "team": "语伴科技 · 队长：王景钰 · 队员：刘凯、王迁皓",
       "background": "面向独居、空巢老人居家场景，把健康状态、跌倒与环境风险、智能家居控制和家属响应从彼此独立的功能连接为统一事件闭环。",
       "goal": "构建“可穿戴感知—云端认知—边缘协同—家庭执行”的完整 AIoT 链路，让手表、门侧终端、家庭中控与家属端围绕同一事件协同工作。",
       "architecture": [
@@ -95,7 +95,8 @@
         "Kiosk / 家居 / 家属反馈"
       ],
       "result": "已完成智能手表、P4 门侧终端、Orange Pi 边缘中枢、六页面 Kiosk、Home Assistant 设备联动和家属通知的系统集成验证；边缘姿态推理实测约 5–7 FPS。健康算法用于趋势监测与风险提示，不作为医疗诊断依据。",
-      "image": "/images/huishu-kiosk.webp"
+      "image": "/images/huishu-kiosk.webp",
+      "imageCaption": "慧枢 · 家庭中控屏实物"
     },
     {
       "id": "aiot-eldercare-2025",
@@ -124,7 +125,8 @@
         "多端交互与家居联动"
       ],
       "result": "完成树莓派后端、数据库、AI 编排、Home Assistant 接入以及 Web / 触摸屏等多端功能的阶段性开发，并进一步演进为 2026 年“慧枢”竞赛系统。",
-      "image": "/images/huishu-architecture.webp"
+      "image": "/images/huishu-architecture.webp",
+      "imageCaption": "后续演进参考 · 2026 慧枢架构（非本阶段硬件）"
     },
     {
       "id": "remote-health-2024",
@@ -153,7 +155,8 @@
         "用户终端"
       ],
       "result": "形成老年健康远程监测系统的项目方案与实践基础，并在后续项目中进一步扩展到语音交互、边缘智能和家庭设备协同。",
-      "image": ""
+      "image": "",
+      "imageCaption": ""
     }
   ],
   "activities": [
@@ -324,10 +327,22 @@
     }
   ],
   "learningPaths": [
-    "51 单片机与 CT107D",
-    "中断 / 定时器 / 串口",
-    "STM32 / ESP32 与 RTOS",
-    "项目实践与竞赛训练"
+    {
+      "title": "51 单片机与 CT107D",
+      "topics": "GPIO、LED、数码管与按键"
+    },
+    {
+      "title": "外设与通信",
+      "topics": "中断、定时器、串口、I2C、SPI 与 1-Wire"
+    },
+    {
+      "title": "STM32 / ESP32 与 RTOS",
+      "topics": "从单片机外设进阶到嵌入式系统"
+    },
+    {
+      "title": "项目实践与竞赛训练",
+      "topics": "蓝桥杯训练、模块联调与项目实践"
+    }
   ],
   "resources": [
     {
