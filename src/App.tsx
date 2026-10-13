@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { usePath } from './lib/router';
 import { Layout } from './components/Layout';
 import { activities, projects, site } from './content';
+import pageTitles from './content/routes.json';
 import Home from './pages/Home';
 import About from './pages/About';
 import Projects from './pages/Projects';
@@ -11,7 +12,7 @@ import Members from './pages/Members';
 import Resources from './pages/Resources';
 import Join from './pages/Join';
 import { ActivityDetail, NotFound, ProjectDetail } from './pages/Detail';
-const names: Record<string,string> = {'/':'首页','/about':'协会介绍','/projects':'项目展示','/activities':'活动记录','/awards':'竞赛荣誉','/members':'协会成员','/resources':'学习资源','/join':'加入我们'};
+const names: Record<string,string> = pageTitles;
 export default function App() {
   const path = usePath();
   const first = useRef(true);

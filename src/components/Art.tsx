@@ -1,11 +1,12 @@
 import { useId, useState } from 'react';
 import { assetPath } from '../lib/assetPath.mjs';
 /** Vector concept renders: intentionally not photographs of completed projects. */
-export function ProjectArt({ kind = 'home', className = '', image = '', alt = '' }: { kind?: string; className?: string; image?: string; alt?: string }) {
+export function ProjectArt({ kind = 'home', className = '', image = '', alt = '', example = true }: { kind?: string; className?: string; image?: string; alt?: string; example?: boolean }) {
   const id = useId().replace(/:/g, '');
   const [failed, setFailed] = useState('');
   const resolvedImage = assetPath(image, import.meta.env.BASE_URL || '/');
   if (image && failed !== image) return <img className={`project-art media-photo ${className}`} src={resolvedImage} alt={alt || '项目图片'} loading="lazy" onError={() => setFailed(image)}/>;
+  if (!example) return <div className={`project-art media-unavailable ${className}`}><span>项目记录</span><p>资料图待补充</p></div>;
   const g = (name: string) => `url(#${id}-${name})`;
   return <svg className={`project-art ${className}`} viewBox="0 0 600 380" role="img" aria-label={`${kind === 'home' ? '智能家居终端' : kind === 'robot' ? '智能移动平台' : '边缘视觉设备'}概念示意图`}>
     <defs>
