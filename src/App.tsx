@@ -25,7 +25,7 @@ export default function App() {
     document.title = `${title} · ${site.name}`;
     const description = document.querySelector('meta[name="description"]');
     description?.setAttribute('content', project?.summary || activity?.summary || site.description);
-    if (!first.current) { window.scrollTo(0,0); document.getElementById('main')?.focus({preventScroll:true}); }
+    if (!first.current) { window.scrollTo({ top: 0, left: 0, behavior: 'instant' }); document.getElementById('main')?.focus({preventScroll:true}); }
     first.current = false;
   },[path,title,project,activity]);
   useScrollReveal(main, path);
