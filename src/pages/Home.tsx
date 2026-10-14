@@ -39,7 +39,7 @@ export default function Home() {
 
     <section className="section section--white home-projects"><div className="container">
       <SectionTitle eyebrow="FEATURED PROJECT" title="从想法到系统，持续实践。" to="/projects" action="全部项目"/>
-      <article className="featured-project">
+      <article className="featured-project" data-reveal>
         <figure className="featured-project__visual">
           <ProjectArt kind={featured.art} image={featured.image} alt={featured.imageCaption || featured.name} example={featured.example}/>
           <figcaption>{featured.imageCaption}</figcaption>
@@ -53,7 +53,7 @@ export default function Home() {
           <Link to={`/projects/${featured.id}`} className="button button--primary">查看慧枢项目<Icon name="arrow" size={18}/></Link>
         </div>
       </article>
-      <div className="project-continuity">
+      <div className="project-continuity" data-reveal>
         <p>围绕老年健康与智慧养老方向持续演进</p>
         <div>{earlierProjects.map(project => <Link to={`/projects/${project.id}`} key={project.id}><span>{project.name}</span><Icon name="arrow" size={18}/></Link>)}</div>
       </div>

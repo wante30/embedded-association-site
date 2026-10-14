@@ -9,6 +9,8 @@ const content = JSON.parse(read('src/content/site.json'));
 const manifest = JSON.parse(read('docs/review/certificates-manifest.json'));
 
 test('each published award links to its reviewed public certificate copies', () => {
+  assert.equal(manifest.version, 2);
+  assert.equal(manifest.advisorPolicy, 'visible-in-certificate');
   assert.equal(manifest.records.length, content.awards.length);
   assert.equal(new Set(manifest.records.map(record => record.id)).size, content.awards.length);
   for (const award of content.awards) {
@@ -21,7 +23,15 @@ test('each published award links to its reviewed public certificate copies', () 
     });
     assert.equal(award.certificate.image, record.image);
     assert.equal(award.certificate.thumbnail, record.thumbnail);
-    assert.ok(record.masks.length > 0, award.id);
+    assert.ok(record.masks.every(mask => !mask.reason.includes('advisor')), award.id);
+    // These seven Lanqiao certificates contain an identity-number row above the advisor.
+    if (award.id.startsWith('lanqiao-') && award.id !== 'lanqiao-province-2026-xiong') {
+      const identity = record.masks.find(mask => mask.reason === 'identity');
+      assert.ok(identity, award.id);
+      assert.ok(identity.rect[1] <= Math.floor(record.height * .43));
+      assert.ok(identity.rect[3] >= Math.ceil(record.height * .47));
+      assert.ok(identity.rect[3] < record.height * .48, `${award.id}: advisor row must remain visible`);
+    }
     for (const { rect } of record.masks) {
       assert.equal(rect.length, 4);
       assert.ok(rect[0] >= 0 && rect[1] >= 0 && rect[2] <= record.width && rect[3] <= record.height);

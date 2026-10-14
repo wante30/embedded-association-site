@@ -11,7 +11,7 @@ function LearningRoute({ title, description, label, steps }: {
   label: string;
   steps: { title: string; topics: string }[];
 }) {
-  return <section className="learning-route">
+  return <section className="learning-route" data-reveal>
     <h2>{title}</h2>
     <p>{description}</p>
     <ol className="learning-path" aria-label={label}>
@@ -59,7 +59,7 @@ export default function Resources() {
       <div className="container">
         <p className="results-count" aria-live="polite">{list.length} 项学习资源</p>
         {list.length ? <div className="resource-grid">
-          {list.map(resource => <a key={resource.id} className="resource-card" href={resource.url} target="_blank" rel="noopener noreferrer">
+          {list.map(resource => <a key={resource.id} className="resource-card" data-reveal href={resource.url} target="_blank" rel="noopener noreferrer">
             <div className="resource-card__top">
               <span className="resource-icon"><Icon name={resource.category === 'FPGA' ? 'circuit' : resource.category === '人工智能' ? 'spark' : resource.category === '物联网' ? 'wifi' : resource.category === '开发工具' ? 'layers' : 'cpu'}/></span>
               <Icon name="external" size={17}/>

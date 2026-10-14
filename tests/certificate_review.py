@@ -14,8 +14,10 @@ def review_certificates(page, base, content, out, check, check_touch_targets, la
     response = page.goto(base + '/awards/', wait_until='networkidle')
     check(f'{label}: certificate page returns HTTP 200', response.status == 200)
     check(f'{label}: full certificate files wait until opened', not requests)
-    cards = page.locator('.award-card')
-    check(f'{label}: each award has a certificate preview', cards.locator('.certificate-thumbnail').count() == len(content['awards']))
+    cards = page.locator('.certificate-wall__item')
+    check(f'{label}: each award has a wall preview', cards.locator('.certificate-thumbnail').count() == len(content['awards']))
+    check(f'{label}: wall sits above the complete text archive', page.locator('.certificate-exhibition').evaluate("el => el.getBoundingClientRect().bottom <= document.querySelector('#award-records').getBoundingClientRect().top"))
+    check(f'{label}: text archive has all records and no embedded thumbnails', page.locator('#award-records .award-card').count() == len(content['awards']) and page.locator('#award-records img').count() == 0)
     indices = range(len(content['awards'])) if all_records else [0, 2]
     for index in indices:
         award = content['awards'][index]
