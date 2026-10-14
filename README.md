@@ -55,6 +55,10 @@ public/favicon.svg    网站图标
 
 ## 发布前检查
 
+手机首页采用单列学习目录、连续活动图文与项目时间记录；栏目入口与标题同行，学习、活动与项目共用底色。首屏电路背景和底部完整荣誉区保留。具体维护边界见 `docs/review/mobile-home-flow.md`。
+
+学习资源页的“推荐竞赛”读取 `competitionRecommendations`，按用户提供的 2026 版名单保留 12 项赛事，S / A / B 表示协会规划推荐层级。建议形式、年级与技术方向来自原表，不作为当届报名规则或现有获奖记录。首页“技术竞赛”和资源页目录可直达该区；S 组默认展开，其余组可展开浏览。来源文件哈希与原表字段见 `docs/review/competition-recommendations-source.json`，原始 Word 文件不随网站公开。
+
 1. 核实新增项目、活动、荣誉和成员信息，并确认照片公开授权。
 2. 运行 `npm test`、`npm run build` 和 `python tests/visual_review.py`。
 3. Pages 发布构建必须使用 `/embedded-association-site/` base，并在该子路径运行浏览器检查；已知路由必须 HTTP 200，未知路由应为 404。

@@ -1,5 +1,5 @@
 import content from './site.json';
-export const { site, directions, projects, activities, culture, awards, members, resources, learningPaths, fpgaLearningPaths, faq } = content;
+export const { site, directions, projects, activities, culture, awards, members, resources, learningPaths, fpgaLearningPaths, competitionRecommendations, faq } = content;
 export type Project = (typeof projects)[number];
 export type Activity = (typeof activities)[number];
 export type Member = (typeof members)[number];

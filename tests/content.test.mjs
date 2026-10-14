@@ -44,6 +44,18 @@ if (data) {
   test('resource links are HTTPS', () => {
     for (const x of data.resources) assert.ok(/^https:\/\/[^\s]+$/.test(x.url), x.name);
   });
+  test('competition recommendations preserve the supplied planning table and its separate scope', () => {
+    const source = JSON.parse(readFileSync(new URL('../docs/review/competition-recommendations-source.json', import.meta.url), 'utf8'));
+    const recommendations = data.competitionRecommendations;
+    assert.deepEqual(recommendations.entries, source.entries);
+    assert.equal(recommendations.version, source.edition);
+    assert.equal(recommendations.entries.length, source.tableRecords);
+    assert.equal(new Set(recommendations.entries.map(entry => entry.id)).size, source.tableRecords);
+    for (const group of recommendations.groups) assert.equal(recommendations.entries.filter(entry => entry.priority === group.id).length, source.counts[group.id]);
+    assert.match(recommendations.note, /推荐层级/);
+    assert.match(recommendations.note, /当届官方通知/);
+    assert.ok(recommendations.entries.every(entry => !Object.hasOwn(entry, 'award') && !Object.hasOwn(entry, 'certificate')));
+  });
   test('signup remains disabled until a real recruitment entry exists', () => assert.equal(data.site.recruitmentUrl, ''));
   test('public structured content does not contain private phone or identity numbers', () => {
     const text = JSON.stringify(data);

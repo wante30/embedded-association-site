@@ -9,7 +9,7 @@ export function ExampleNote({ children = '当前为视觉预览，以下内容�
 export function Directions({ compact = false }: { compact?: boolean }) {
   return <div className={`directions-grid ${compact ? 'directions-grid--compact' : ''}`}>
     {directions.map(direction => <Link
-      to={`/resources?category=${encodeURIComponent(direction.resourceCategory)}`}
+      to={direction.id === 'contests' ? '/resources#recommended-competitions' : `/resources?category=${encodeURIComponent(direction.resourceCategory)}`}
       data-reveal className={`direction-card${direction.id === 'fpga' ? ' direction-card--featured' : ''}`} key={direction.id}
     >
       <span className="direction-icon"><Icon name={direction.icon} size={29}/></span>

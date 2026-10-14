@@ -1,0 +1,36 @@
+/* Planning recommendations remain a text directory, separate from earned awards. */
+.resource-jumps { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
+.resource-jumps a { display: inline-flex; align-items: center; min-height: 44px; font-size: 14px; color: var(--blue); }
+.resource-jumps a:hover { color: var(--blue-hover); }
+.competition-recommendations { margin-block: 12px 44px; padding-block: 28px; border-block: 1px solid var(--line); }
+.competition-recommendations__heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+.competition-recommendations__heading h2 { font-size: 26px; }
+.competition-recommendations__heading > span { color: var(--faint); font-size: 12px; white-space: nowrap; }
+.competition-recommendations > p { color: var(--muted); font-size: 14px; margin-top: 14px; }
+.competition-recommendations > .competition-recommendations__note, .competition-recommendations > .competition-recommendations__source { font-size: 12px; }
+.competition-groups { margin-top: 24px; }
+.competition-group { border-top: 1px solid var(--line); }
+.competition-group summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; cursor: pointer; list-style: none; }
+.competition-group summary::-webkit-details-marker { display: none; }
+.competition-group h3 { display: flex; align-items: baseline; gap: 16px; margin: 0; font-size: 17px; }
+.competition-group h3 > span { color: var(--blue); font-family: var(--font-mono); }
+.competition-group summary > span { display: flex; align-items: center; gap: 12px; font-size: 12px; color: var(--muted); white-space: nowrap; }
+.competition-group[open] summary .icon { transform: rotate(90deg); }
+.competition-group > p { font-size: 13px; color: var(--muted); margin: 0 0 20px 28px; }
+.competition-list { list-style: none; margin: 0; padding: 0 0 12px 28px; }
+.competition-item { display: grid; grid-template-columns: 1fr 1.1fr; gap: 8px 40px; padding-block: 20px; border-top: 1px solid var(--line); }
+.competition-item h4 { margin: 0; font-size: 16px; line-height: 1.7; font-weight: 600; overflow-wrap: anywhere; }
+.competition-item__topics { font-size: 13px; color: var(--muted); }
+.competition-item__meta { display: flex; flex-wrap: wrap; gap: 4px 20px; font-size: 12px; color: var(--muted); }
+.competition-item__purpose { font-size: 13px; color: var(--blue); }
+@media (max-width: 767px) {
+  .resource-jumps { justify-content: space-between; gap: 8px 16px; }
+  .resource-jumps a { font-size: 13px; }
+  .competition-recommendations { margin-bottom: 28px; padding-block: 24px; }
+  .competition-recommendations__heading h2 { font-size: 24px; }
+  .competition-group h3 { gap: 12px; font-size: 15px; }
+  .competition-group > p { margin-left: 0; }
+  .competition-list { padding-left: 0; }
+  .competition-item { grid-template-columns: minmax(0,1fr); gap: 8px; padding-block: 20px; }
+  .competition-item h4 { font-size: 15px; }
+}

@@ -18,6 +18,7 @@ from playwright.sync_api import sync_playwright
 from certificate_review import review_certificates
 from motion_review import review_motion
 from home_review import review_home
+from competitions_review import review_competitions
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = Path(os.environ.get('REVIEW_OUTPUT', str(ROOT / 'artifacts/review')))
@@ -360,6 +361,7 @@ try:
             print(f'{width}px: all public routes fit', flush=True)
         if not INLINE:
             review_home(browser, BASE, CONTENT, OUT, check)
+            review_competitions(browser, BASE, CONTENT, OUT, check)
             review_motion(browser, BASE, check)
         browser.close()
 except Exception as e:
