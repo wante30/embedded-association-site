@@ -1,0 +1,366 @@
+{
+  "version": 1,
+  "fill": [
+    20,
+    37,
+    53
+  ],
+  "records": [
+    {
+      "id": "iot-national-2026-wang",
+      "image": "/images/certificates/iot-national-2026-wang.webp",
+      "sha256": "f0c62731d4aaa7294ecf6e8233cc1e00ad51892056b025ac45e7668970857fcc",
+      "width": 1871,
+      "height": 1323,
+      "thumbnail": "/images/certificates/iot-national-2026-wang-thumb.webp",
+      "thumbnailSha256": "88164a17fe5ba983d1612b16af5e86c9fe8d4a7f1503ec1eb223df99739484fc",
+      "masks": [
+        {
+          "rect": [
+            149,
+            738,
+            637,
+            856
+          ],
+          "reason": "advisor"
+        }
+      ]
+    },
+    {
+      "id": "craic-appliance-2026",
+      "image": "/images/certificates/craic-appliance-2026.webp",
+      "sha256": "08e73bc1d11c9ea3be4f217c4bf0cdfd56eed26893125a33bb026497632bccf0",
+      "width": 1872,
+      "height": 1323,
+      "thumbnail": "/images/certificates/craic-appliance-2026-thumb.webp",
+      "thumbnailSha256": "149698e1516ddb46afb3120060271e92771e552189740c881deb8d326da8021d",
+      "masks": [
+        {
+          "rect": [
+            234,
+            836,
+            674,
+            901
+          ],
+          "reason": "advisor"
+        }
+      ]
+    },
+    {
+      "id": "lanqiao-national-2026-cai",
+      "image": "/images/certificates/lanqiao-national-2026-cai.webp",
+      "sha256": "6fc596cca3a41e5863d81e878e7568b065da377b89fe2fcba2b2f0ee55123ec7",
+      "width": 2480,
+      "height": 3508,
+      "thumbnail": "/images/certificates/lanqiao-national-2026-cai-thumb.webp",
+      "thumbnailSha256": "d5dc5c08836c629748771f6d582c2257d9f2cc1eb5665440e82e1c19a0f68c66",
+      "masks": [
+        {
+          "rect": [
+            372,
+            1508,
+            1836,
+            1807
+          ],
+          "reason": "identity-and-advisor"
+        }
+      ]
+    },
+    {
+      "id": "lanqiao-national-2026-sun",
+      "image": "/images/certificates/lanqiao-national-2026-sun.webp",
+      "sha256": "770bcf073f1b83ad5b7781359d8d4c245fc5789959a1c06369c7e4e37535ec49",
+      "width": 1280,
+      "height": 1811,
+      "thumbnail": "/images/certificates/lanqiao-national-2026-sun-thumb.webp",
+      "thumbnailSha256": "dfcc7a404a1f480900c44c35c7e48bb3888062f8e493851277cc590ad31de403",
+      "masks": [
+        {
+          "rect": [
+            192,
+            778,
+            948,
+            933
+          ],
+          "reason": "identity-and-advisor"
+        }
+      ]
+    },
+    {
+      "id": "raicom-national-2026",
+      "image": "/images/certificates/raicom-national-2026.webp",
+      "sha256": "faffd2d03399e9cbee7f5366ea1f0b739979a631fff90d9d35732c562e4c5182",
+      "width": 1000,
+      "height": 707,
+      "thumbnail": "/images/certificates/raicom-national-2026-thumb.webp",
+      "thumbnailSha256": "688096eb7bf20b49aaaebef7182ae4c5450677233230002eed450e040fc88e4e",
+      "masks": [
+        {
+          "rect": [
+            120,
+            295,
+            400,
+            329
+          ],
+          "reason": "advisor"
+        },
+        {
+          "rect": [
+            124,
+            497,
+            214,
+            584
+          ],
+          "reason": "verification-qr"
+        }
+      ]
+    },
+    {
+      "id": "iot-ne-2026",
+      "image": "/images/certificates/iot-ne-2026.webp",
+      "sha256": "e47acee54eb72f39ec5c43f19c8ff76f5432af6bac5148a4bbb90822346b5d8f",
+      "width": 1260,
+      "height": 890,
+      "thumbnail": "/images/certificates/iot-ne-2026-thumb.webp",
+      "thumbnailSha256": "d9a0d8f718596eb421a2e5e83387bddee2bf7d20a91114796cebd841128788cd",
+      "masks": [
+        {
+          "rect": [
+            100,
+            496,
+            555,
+            576
+          ],
+          "reason": "advisor"
+        }
+      ]
+    },
+    {
+      "id": "opto-ne-2026",
+      "image": "/images/certificates/opto-ne-2026.webp",
+      "sha256": "423d920ae9500b335d4dc4d9c35377ef7c0f0728bab4ff97c7a289af7d99fea2",
+      "width": 1813,
+      "height": 1280,
+      "thumbnail": "/images/certificates/opto-ne-2026-thumb.webp",
+      "thumbnailSha256": "1f74273c016cf97123032a5ae84896688c4486a481d69a09fc8caa11f6752406",
+      "masks": [
+        {
+          "rect": [
+            132,
+            563,
+            726,
+            660
+          ],
+          "reason": "advisor"
+        }
+      ]
+    },
+    {
+      "id": "statistics-heilongjiang-2026",
+      "image": "/images/certificates/statistics-heilongjiang-2026.webp",
+      "sha256": "0b9e9551da0cf82bb0edf034a649180f67bf987032afb27035435c6203f76b89",
+      "width": 1871,
+      "height": 1323,
+      "thumbnail": "/images/certificates/statistics-heilongjiang-2026-thumb.webp",
+      "thumbnailSha256": "a31a74b8b8f301db16d8e13c6f8efc1e143b7cdfe73854b01806a24b6a5db130",
+      "masks": [
+        {
+          "rect": [
+            243,
+            902,
+            655,
+            962
+          ],
+          "reason": "advisor"
+        }
+      ]
+    },
+    {
+      "id": "lanqiao-embedded-2026-wang",
+      "image": "/images/certificates/lanqiao-embedded-2026-wang.webp",
+      "sha256": "2af6b573a513374bfe90043186c4e9c51f21cc5972f0654ff20df3e93e0b5e9c",
+      "width": 1323,
+      "height": 1871,
+      "thumbnail": "/images/certificates/lanqiao-embedded-2026-wang-thumb.webp",
+      "thumbnailSha256": "030ec988cf98bfd25d30ff1a3b7ee30137a1b5ce73afc29630d4a7f4176ce06f",
+      "masks": [
+        {
+          "rect": [
+            198,
+            804,
+            980,
+            964
+          ],
+          "reason": "identity-and-advisor"
+        }
+      ]
+    },
+    {
+      "id": "lanqiao-province-2026-cai",
+      "image": "/images/certificates/lanqiao-province-2026-cai.webp",
+      "sha256": "6f7929b5de2ebf53303601574081d257a106d00b299423c0e6ca80aac806804c",
+      "width": 2480,
+      "height": 3508,
+      "thumbnail": "/images/certificates/lanqiao-province-2026-cai-thumb.webp",
+      "thumbnailSha256": "7751c55cf2322f9fdce59ee9bc1e93d5767ad2d6ccaf53cc567b3278da1f3d3a",
+      "masks": [
+        {
+          "rect": [
+            372,
+            1508,
+            1836,
+            1807
+          ],
+          "reason": "identity-and-advisor"
+        }
+      ]
+    },
+    {
+      "id": "lanqiao-province-2026-he",
+      "image": "/images/certificates/lanqiao-province-2026-he.webp",
+      "sha256": "c3d3a974509bf49286df2e81d4384e43f210993c74ffb3b44ebd3c60f5459ba3",
+      "width": 1280,
+      "height": 1811,
+      "thumbnail": "/images/certificates/lanqiao-province-2026-he-thumb.webp",
+      "thumbnailSha256": "a7e5aeef50dbbd081e6d86315fe7337468b9066cee71e333659d4266ac399e04",
+      "masks": [
+        {
+          "rect": [
+            192,
+            778,
+            948,
+            933
+          ],
+          "reason": "identity-and-advisor"
+        }
+      ]
+    },
+    {
+      "id": "raicom-heilongjiang-2026",
+      "image": "/images/certificates/raicom-heilongjiang-2026.webp",
+      "sha256": "5a033b1fd9b2e54b0d2ec2b102f06b6f9fd47c8270a01c142ccc6d0102066b7e",
+      "width": 1000,
+      "height": 707,
+      "thumbnail": "/images/certificates/raicom-heilongjiang-2026-thumb.webp",
+      "thumbnailSha256": "7cb1c821cc0647263f60da206e78d2af8775abd9f7712392c6411cb9c9a146c2",
+      "masks": [
+        {
+          "rect": [
+            120,
+            295,
+            400,
+            329
+          ],
+          "reason": "advisor"
+        },
+        {
+          "rect": [
+            124,
+            497,
+            214,
+            584
+          ],
+          "reason": "verification-qr"
+        }
+      ]
+    },
+    {
+      "id": "lanqiao-province-2026-zeng",
+      "image": "/images/certificates/lanqiao-province-2026-zeng.webp",
+      "sha256": "9023c631adba9f3f384607831f5b3968495e92a859ec69121560f636e7b90e2c",
+      "width": 2480,
+      "height": 3508,
+      "thumbnail": "/images/certificates/lanqiao-province-2026-zeng-thumb.webp",
+      "thumbnailSha256": "1609e55a9c81b7cf5aa3fa494dea82a485ec9a71bb793dfe66627cf54485dd05",
+      "masks": [
+        {
+          "rect": [
+            372,
+            1508,
+            1836,
+            1807
+          ],
+          "reason": "identity-and-advisor"
+        }
+      ]
+    },
+    {
+      "id": "lanqiao-province-2026-xiong",
+      "image": "/images/certificates/lanqiao-province-2026-xiong.webp",
+      "sha256": "daddc6dcec3bc3a488babe90e1029538cc6db2502ce8e2ec8c894e037a8a0ef6",
+      "width": 1080,
+      "height": 1527,
+      "thumbnail": "/images/certificates/lanqiao-province-2026-xiong-thumb.webp",
+      "thumbnailSha256": "6883c5aa8915323d523e036c22d2d002dee985b3b84c7a8e6dbd80aefb4e9b32",
+      "masks": [
+        {
+          "rect": [
+            756,
+            1175,
+            983,
+            1413
+          ],
+          "reason": "verification-qr"
+        }
+      ]
+    },
+    {
+      "id": "lanqiao-mcu-2026",
+      "image": "/images/certificates/lanqiao-mcu-2026.webp",
+      "sha256": "71cbc3672685dad1f3f4593f677439eeb2eb99c62580ceb1450747582233bac4",
+      "width": 1279,
+      "height": 1810,
+      "thumbnail": "/images/certificates/lanqiao-mcu-2026-thumb.webp",
+      "thumbnailSha256": "6acef024d364cd3817f30cf6d195ef5af145d4f4c508ce93fe3fb0cb26b47c05",
+      "masks": [
+        {
+          "rect": [
+            191,
+            778,
+            947,
+            933
+          ],
+          "reason": "identity-and-advisor"
+        }
+      ]
+    },
+    {
+      "id": "mathmodel-campus-2026",
+      "image": "/images/certificates/mathmodel-campus-2026.webp",
+      "sha256": "2a77010fce371a8511320b0a613e7696e55b278b0879295e2a00682adbe098c9",
+      "width": 1289,
+      "height": 1116,
+      "thumbnail": "/images/certificates/mathmodel-campus-2026-thumb.webp",
+      "thumbnailSha256": "7a9daceee9e2ce2a22dca5b302c530893ee221fd2cc2e43b6d905838ce7d01b0",
+      "masks": [
+        {
+          "rect": [
+            0,
+            536,
+            1289,
+            854
+          ],
+          "reason": "other-teams"
+        },
+        {
+          "rect": [
+            0,
+            902,
+            1289,
+            1116
+          ],
+          "reason": "other-teams"
+        },
+        {
+          "rect": [
+            210,
+            854,
+            467,
+            902
+          ],
+          "reason": "internal-team-number"
+        }
+      ]
+    }
+  ]
+}
