@@ -15,6 +15,7 @@ import threading
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright
+from certificate_review import review_certificates
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = Path(os.environ.get('REVIEW_OUTPUT', str(ROOT / 'artifacts/review')))
@@ -193,6 +194,8 @@ try:
         check('award empty state restores all records', page.locator('.award-card').count()==len(CONTENT['awards']))
         page.get_by_role('button',name='校级',exact=True).click()
         check('campus awards retain their own level', page.locator('.award-card').count()==1 and '王承粲' in page.locator('.award-card').inner_text())
+        if not INLINE:
+            review_certificates(page, BASE, CONTENT, OUT, check, check_touch_targets, 'desktop', all_records=True)
         load(page,'/members')
         page.get_by_role('button',name='学生管理员',exact=True).click()
         check('student manager filter shows confirmed public records',page.locator('.member-card').count()==3)
@@ -250,6 +253,9 @@ try:
             load(page,'/')
             check_touch_targets(f'{label} header', page.locator('.site-header button'))
             check_touch_targets(f'{label} hero', page.locator('.hero-actions a'))
+            if not INLINE:
+                review_certificates(page, BASE, CONTENT, OUT, check, check_touch_targets, f'touch-{width}')
+                load(page, '/')
             page.locator('.hero-actions').get_by_role('link', name='竞赛荣誉', exact=True).tap()
             check(f'{label}: home hero opens all awards without the menu', page.locator('.award-card').count() == len(CONTENT['awards']))
             load(page, '/about')

@@ -257,7 +257,13 @@
       "award": "一等奖",
       "team": "王景钰 · 刘凯 · 王迁皓",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/iot-national-2026-wang.webp",
+        "thumbnail": "/images/certificates/iot-national-2026-wang-thumb.webp",
+        "width": 1871,
+        "height": 1323
+      }
     },
     {
       "id": "craic-appliance-2026",
@@ -267,7 +273,13 @@
       "award": "智能家电创新赛一等奖",
       "team": "王景钰 · 周天 · 刘凯",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/craic-appliance-2026.webp",
+        "thumbnail": "/images/certificates/craic-appliance-2026-thumb.webp",
+        "width": 1872,
+        "height": 1323
+      }
     },
     {
       "id": "lanqiao-national-2026-cai",
@@ -277,7 +289,13 @@
       "award": "单片机设计与开发大学组全国总决赛一等奖",
       "team": "蔡永胜",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/lanqiao-national-2026-cai.webp",
+        "thumbnail": "/images/certificates/lanqiao-national-2026-cai-thumb.webp",
+        "width": 2480,
+        "height": 3508
+      }
     },
     {
       "id": "lanqiao-national-2026-sun",
@@ -287,7 +305,13 @@
       "award": "单片机设计与开发大学组全国总决赛三等奖",
       "team": "孙裕杰",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/lanqiao-national-2026-sun.webp",
+        "thumbnail": "/images/certificates/lanqiao-national-2026-sun-thumb.webp",
+        "width": 1280,
+        "height": 1811
+      }
     },
     {
       "id": "raicom-national-2026",
@@ -297,7 +321,13 @@
       "award": "视觉系统创新竞赛项目三等奖",
       "team": "孔宇熙 · 祖力喀尔·艾斯卡尔 · 田思娴",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/raicom-national-2026.webp",
+        "thumbnail": "/images/certificates/raicom-national-2026-thumb.webp",
+        "width": 1000,
+        "height": 707
+      }
     },
     {
       "id": "iot-ne-2026",
@@ -307,7 +337,13 @@
       "award": "二等奖",
       "team": "祖力喀尔·艾斯卡尔 · 梁荣凯 · 霍钫楷",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/iot-ne-2026.webp",
+        "thumbnail": "/images/certificates/iot-ne-2026-thumb.webp",
+        "width": 1260,
+        "height": 890
+      }
     },
     {
       "id": "opto-ne-2026",
@@ -317,7 +353,13 @@
       "award": "创意组二等奖",
       "team": "祖力喀尔 · 梁荣凯 · 霍钫楷",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/opto-ne-2026.webp",
+        "thumbnail": "/images/certificates/opto-ne-2026-thumb.webp",
+        "width": 1813,
+        "height": 1280
+      }
     },
     {
       "id": "statistics-heilongjiang-2026",
@@ -327,7 +369,13 @@
       "award": "本科生组一等奖",
       "team": "林洋 · 王景钰 · 张乾雯",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/statistics-heilongjiang-2026.webp",
+        "thumbnail": "/images/certificates/statistics-heilongjiang-2026-thumb.webp",
+        "width": 1871,
+        "height": 1323
+      }
     },
     {
       "id": "lanqiao-embedded-2026-wang",
@@ -337,7 +385,13 @@
       "award": "嵌入式设计与开发大学组黑龙江赛区一等奖",
       "team": "王景钰",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/lanqiao-embedded-2026-wang.webp",
+        "thumbnail": "/images/certificates/lanqiao-embedded-2026-wang-thumb.webp",
+        "width": 1323,
+        "height": 1871
+      }
     },
     {
       "id": "lanqiao-province-2026-cai",
@@ -347,7 +401,13 @@
       "award": "单片机设计与开发大学组黑龙江赛区一等奖",
       "team": "蔡永胜",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/lanqiao-province-2026-cai.webp",
+        "thumbnail": "/images/certificates/lanqiao-province-2026-cai-thumb.webp",
+        "width": 2480,
+        "height": 3508
+      }
     },
     {
       "id": "lanqiao-province-2026-he",
@@ -357,7 +417,13 @@
       "award": "单片机设计与开发大学组黑龙江赛区二等奖",
       "team": "贺嘉兴",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/lanqiao-province-2026-he.webp",
+        "thumbnail": "/images/certificates/lanqiao-province-2026-he-thumb.webp",
+        "width": 1280,
+        "height": 1811
+      }
     },
     {
       "id": "raicom-heilongjiang-2026",
@@ -367,7 +433,13 @@
       "award": "视觉系统创新竞赛项目二等奖",
       "team": "祖力喀尔·艾斯卡尔 · 孔宇熙 · 田思娴",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/raicom-heilongjiang-2026.webp",
+        "thumbnail": "/images/certificates/raicom-heilongjiang-2026-thumb.webp",
+        "width": 1000,
+        "height": 707
+      }
     },
     {
       "id": "lanqiao-province-2026-zeng",
@@ -377,7 +449,13 @@
       "award": "单片机设计与开发大学组黑龙江赛区三等奖",
       "team": "曾智豪",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/lanqiao-province-2026-zeng.webp",
+        "thumbnail": "/images/certificates/lanqiao-province-2026-zeng-thumb.webp",
+        "width": 2480,
+        "height": 3508
+      }
     },
     {
       "id": "lanqiao-province-2026-xiong",
@@ -387,7 +465,13 @@
       "award": "单片机设计与开发大学组三等奖",
       "team": "熊舒钰珏",
       "example": false,
-      "sourceLabel": "成绩截图"
+      "sourceLabel": "成绩截图",
+      "certificate": {
+        "image": "/images/certificates/lanqiao-province-2026-xiong.webp",
+        "thumbnail": "/images/certificates/lanqiao-province-2026-xiong-thumb.webp",
+        "width": 1080,
+        "height": 1527
+      }
     },
     {
       "id": "lanqiao-mcu-2026",
@@ -397,7 +481,13 @@
       "award": "单片机设计与开发大学组黑龙江赛区三等奖",
       "team": "高嘉睿",
       "example": false,
-      "sourceLabel": "获奖证书"
+      "sourceLabel": "获奖证书",
+      "certificate": {
+        "image": "/images/certificates/lanqiao-mcu-2026.webp",
+        "thumbnail": "/images/certificates/lanqiao-mcu-2026-thumb.webp",
+        "width": 1279,
+        "height": 1810
+      }
     },
     {
       "id": "mathmodel-campus-2026",
@@ -407,7 +497,13 @@
       "award": "一等奖",
       "team": "钟德成 · 井琦 · 王承粲",
       "example": false,
-      "sourceLabel": "成绩截图"
+      "sourceLabel": "成绩截图",
+      "certificate": {
+        "image": "/images/certificates/mathmodel-campus-2026.webp",
+        "thumbnail": "/images/certificates/mathmodel-campus-2026-thumb.webp",
+        "width": 1289,
+        "height": 1116
+      }
     }
   ],
   "members": [

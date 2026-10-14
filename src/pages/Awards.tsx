@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { awards } from '../content';
 import { Icon } from '../components/Icon';
 import { EmptyState, FilterTabs, JoinBanner, SearchField } from '../components/UI';
+import { CertificateThumbnail, CertificateViewer } from '../components/CertificateViewer';
+import '../styles/certificates.css';
 
 const levels = ['全部', '国家级', '赛区', '省级', '校级'];
 
 export default function Awards() {
   const [level, setLevel] = useState('全部');
   const [query, setQuery] = useState('');
+  const [selected, setSelected] = useState<(typeof awards)[number] | null>(null);
   const list = awards.filter(award =>
     (level === '全部' || award.level === level) &&
     `${award.name} ${award.award} ${award.team}`.toLowerCase().includes(query.trim().toLowerCase())
@@ -43,13 +46,14 @@ export default function Awards() {
                   <p className="award-name">{award.award}</p>
                   <p>参赛成员：{award.team}</p>
                 </div>
-                <div className="award-icon" aria-hidden="true"><Icon name={award.level === '国家级' ? 'trophy' : 'shield'} size={43}/></div>
+                <CertificateThumbnail certificate={award.certificate} title={`${award.name} · ${award.team}`} sourceLabel={award.sourceLabel} onOpen={() => setSelected(award)}/>
               </article>)}
             </div>
           </section>)}
         </div> : <EmptyState reset={reset}/>}
       </div>
     </section>
+    {selected && <CertificateViewer certificate={selected.certificate} title={`${selected.name} · ${selected.award} · ${selected.team}`} sourceLabel={selected.sourceLabel} onClose={() => setSelected(null)}/>}
     <JoinBanner/>
   </>;
 }
