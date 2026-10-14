@@ -34,6 +34,14 @@ def review_home(browser, base, content, out, check):
             check(label + ': visible circuit region has photographic detail', max(ImageStat.Stat(tile).stddev) > 12)
         check(label + ': hero introduces the association and learning resources', page.locator('.hero-actions a').evaluate_all('els => els.map(el => ({text:el.textContent,href:el.href}))') == [{'text':'了解协会','href':base+'/about'},{'text':'学习资源','href':base+'/resources'}])
         check(label + ': learning and activities precede project records', page.evaluate('document.querySelector(".home-directions").offsetTop < document.querySelector(".home-activities").offsetTop && document.querySelector(".home-activities").offsetTop < document.querySelector(".home-projects").offsetTop'))
+        directions = page.locator('.home-directions .direction-card')
+        check(label + ': learning directory retains every published direction', directions.locator('h3').all_text_contents() == [direction['name'] for direction in content['directions']] and directions.locator('p').all_text_contents() == [direction['tags'] for direction in content['directions']])
+        activities = page.locator('.home-activities .activity-card')
+        check(label + ': journal retains every activity title and date', activities.locator('h3').all_text_contents() == [activity['title'] for activity in content['activities']] and activities.locator('.card-bottom > span').all_text_contents() == [activity['duration'] for activity in content['activities']])
+        if width < 768:
+            check(label + ': directory is one continuous column with usable touch areas', directions.evaluate_all('els => { const rs=els.map(el=>el.getBoundingClientRect()); return rs.length>0 && rs.every((r,i)=>r.height>=44 && Math.abs(r.left-rs[0].left)<1 && Math.abs(r.width-rs[0].width)<1 && (i===0 || r.top>=rs[i-1].bottom-1)); }'))
+            check(label + ': journal metadata shares a row without overlapping titles', activities.evaluate_all('els => els.every(el => { const title=el.querySelector("h3").getBoundingClientRect(), category=el.querySelector(".activity-category").getBoundingClientRect(), date=el.querySelector(".card-bottom").getBoundingClientRect(); return Math.max(category.bottom,date.bottom)<=title.top+1 && category.right<=date.left+1 && Math.abs((category.top+category.bottom-date.top-date.bottom)/2)<4; })'))
+            check(label + ': section headings and browse links share a row without overlap', page.locator('.home-directions .section-heading, .home-activities .section-heading, .home-projects .section-heading').evaluate_all('els => els.every(el => { const h=el.querySelector("h2").getBoundingClientRect(), a=el.querySelector("a").getBoundingClientRect(); return h.right<=a.left && h.top<a.bottom && a.top<h.bottom && a.height>=44; })'))
         rows = page.locator('.home-project-row')
         check(label + ': all project titles follow the content source', rows.locator('h3').all_text_contents() == [project['name'] for project in content['projects']])
         check(label + ': project titles share a restrained scale', rows.locator('h3').evaluate_all('els => { const sizes=els.map(el => parseFloat(getComputedStyle(el).fontSize)); return sizes.length>0 && new Set(sizes).size===1 && Math.max(...sizes)<=20; }'))
@@ -52,6 +60,9 @@ def review_home(browser, base, content, out, check):
         check(label + ': no console errors', not errors)
         if width in [390,1440] and not dark and dpr == 1:
             page.screenshot(path=str(out / f'home-{width}-honors.png'), animations='disabled')
+            for section in ['directions', 'activities']:
+                page.locator(f'.home-{section}').scroll_into_view_if_needed()
+                page.screenshot(path=str(out / f'home-{width}-{section}.png'), animations='disabled')
             page.locator('.home-projects').scroll_into_view_if_needed()
             page.screenshot(path=str(out / f'home-{width}-projects.png'), animations='disabled')
         context.close()
