@@ -1,4 +1,4 @@
-"""Homepage hierarchy, responsive circuit imagery, and real certificate previews."""
+"""Association-first homepage, responsive circuit imagery, and final honors section."""
 from io import BytesIO
 from PIL import Image, ImageStat
 
@@ -32,22 +32,26 @@ def review_home(browser, base, content, out, check):
             shot = page.screenshot(animations='disabled')
             tile = Image.open(BytesIO(shot)).convert('RGB').crop((12*dpr,area['top']*dpr,(width-12)*dpr,area['bottom']*dpr))
             check(label + ': visible circuit region has photographic detail', max(ImageStat.Stat(tile).stddev) > 12)
-        check(label + ': primary action opens the actual featured project', page.locator('.hero-actions a').first.evaluate('el => el.href') == base + '/projects/' + content['projects'][0]['id'])
-        check(label + ': featured project precedes honors, then learning directions', page.evaluate('document.querySelector(".home-projects").offsetTop < document.querySelector(".awards-preview").offsetTop && document.querySelector(".awards-preview").offsetTop < document.querySelector(".home-directions").offsetTop'))
-        check(label + ': featured title follows the content source', content['projects'][0]['shortName'] in page.locator('#featured-project-heading').inner_text())
+        check(label + ': hero introduces the association and learning resources', page.locator('.hero-actions a').evaluate_all('els => els.map(el => ({text:el.textContent,href:el.href}))') == [{'text':'了解协会','href':base+'/about'},{'text':'学习资源','href':base+'/resources'}])
+        check(label + ': learning and activities precede project records', page.evaluate('document.querySelector(".home-directions").offsetTop < document.querySelector(".home-activities").offsetTop && document.querySelector(".home-activities").offsetTop < document.querySelector(".home-projects").offsetTop'))
+        rows = page.locator('.home-project-row')
+        check(label + ': all project titles follow the content source', rows.locator('h3').all_text_contents() == [project['name'] for project in content['projects']])
+        check(label + ': project titles share a restrained scale', rows.locator('h3').evaluate_all('els => { const sizes=els.map(el => parseFloat(getComputedStyle(el).fontSize)); return sizes.length>0 && new Set(sizes).size===1 && Math.max(...sizes)<=20; }'))
         page.screenshot(path=str(out / f'home-{width}-{"dark" if dark else "light"}-{dpr}x-viewport.png'), animations='disabled')
-        preview = page.locator('.home-certificate-preview')
-        preview.scroll_into_view_if_needed()
+        honors = page.get_by_role('region', name='竞赛荣誉', exact=True)
+        honors.scroll_into_view_if_needed()
+        check(label + ': complete honors section closes the homepage', honors.evaluate('el => el === document.querySelector("main").lastElementChild && el.previousElementSibling.matches(".join-banner")'))
+        preview = honors.locator('.home-certificate-preview')
         preview.locator('img').evaluate_all('imgs => imgs.forEach(img => img.loading="eager")')
-        preview.locator('img').first.evaluate('async img => await img.decode()')
+        preview.locator('img').evaluate_all('async imgs => await Promise.all(imgs.map(img => img.decode()))')
         expected = [base + award['certificate']['thumbnail'] for award in content['awards'][:3]]
-        check(label + ': proof preview uses the three published thumbnails', preview.locator('img').evaluate_all('imgs => imgs.map(img => img.currentSrc)') == expected)
-        check(label + ': preview loads without full certificates', not full_certificates)
-        check(label + ': preview opens the certificate wall', preview.evaluate('el => el.href') == base + '/awards')
+        check(label + ': bottom section retains the published certificate collage', preview.locator('img').evaluate_all('imgs => imgs.map(img => img.currentSrc)') == expected)
+        check(label + ': bottom preview loads without full certificates', not full_certificates)
+        check(label + ': bottom preview opens the certificate wall', preview.evaluate('el => el.href') == base + '/awards')
         check(label + ': no horizontal overflow', page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
         check(label + ': no console errors', not errors)
         if width in [390,1440] and not dark and dpr == 1:
             page.screenshot(path=str(out / f'home-{width}-honors.png'), animations='disabled')
             page.locator('.home-projects').scroll_into_view_if_needed()
-            page.screenshot(path=str(out / f'home-{width}-featured.png'), animations='disabled')
+            page.screenshot(path=str(out / f'home-{width}-projects.png'), animations='disabled')
         context.close()

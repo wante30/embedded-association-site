@@ -119,7 +119,7 @@ try:
                 check(f'{label} {route}: no horizontal overflow', page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 check(f'{label} {route}: images loaded', page.evaluate('Array.from(document.images).every(img => img.complete && img.naturalWidth > 0)'))
                 check(f'{label} {route}: images decode', page.evaluate('async () => (await Promise.all(Array.from(document.images, img => img.decode().then(() => true, () => false)))).every(Boolean)'))
-                displayed_projects = CONTENT['projects'][:1] if route == '/' else CONTENT['projects'] if route == '/projects' else []
+                displayed_projects = CONTENT['projects'] if route == '/projects' else []
                 expected = [project['image'] for project in displayed_projects if project['image']]
                 expected += [a['image'] for a in CONTENT['activities'] if a['image']] if route in ['/', '/activities'] else []
                 expected += [entry['image'] for group in ['projects', 'activities'] for entry in CONTENT[group] if route == f'/{group}/{entry["id"]}' and entry['image']]
@@ -260,8 +260,15 @@ try:
             if not INLINE:
                 review_certificates(page, BASE, CONTENT, OUT, check, check_touch_targets, f'touch-{width}')
                 load(page, '/')
-            page.locator('.hero-actions').get_by_role('link', name='竞赛荣誉', exact=True).tap()
-            check(f'{label}: home hero opens all awards without the menu', page.locator('.award-card').count() == len(CONTENT['awards']))
+            page.locator('.hero-actions').get_by_role('link', name='了解协会', exact=True).tap()
+            check(f'{label}: home hero opens the association introduction', page.locator('.about-actions').count() == 1)
+            load(page, '/')
+            page.locator('.hero-actions').get_by_role('link', name='学习资源', exact=True).tap()
+            check(f'{label}: home hero opens learning resources', page.get_by_role('list', name='FPGA 学习路线', exact=True).count() == 1)
+            load(page, '/')
+            honors_wall = page.locator('.home-certificate-preview')
+            honors_wall.tap()
+            check(f'{label}: bottom home collage opens the certificate wall', page.locator('.certificate-wall__item').count() == len(CONTENT['awards']))
             load(page, '/about')
             check_touch_targets(f'{label} about introduction', page.locator('.about-actions a'))
             page.locator('.about-actions').get_by_role('link', name='查看竞赛荣誉', exact=True).tap()

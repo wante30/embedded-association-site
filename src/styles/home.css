@@ -1,4 +1,4 @@
-/* The homepage uses the circuit photograph, a featured system, and real proof. */
+/* Association-first homepage with a responsive circuit photograph. */
 .home-hero { position: relative; isolation: isolate; overflow: hidden; background: #06141f; color: #f3f8fc; }
 .hero-content { position: relative; z-index: 2; padding-block: 90px 108px; pointer-events: none; }
 .hero-content a { pointer-events: auto; }
@@ -22,29 +22,14 @@
 .home-facts dt { font-size: 12px; color: #a8c0d0; }
 .home-facts dd { font-size: 20px; font-weight: 600; margin: 0; }
 .home-facts small { font-size: 12px; font-weight: 400; }
-.home-projects__heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 30px; }
-.home-projects__heading .eyebrow { margin: 0; }
-.home-projects__heading .text-link { min-height: 44px; }
-.featured-project { display: grid; grid-template-columns: 1fr 1.05fr; grid-template-areas: 'visual heading' 'visual content'; column-gap: 72px; align-items: start; }
-.featured-project__heading { grid-area: heading; }
-.featured-project h2 > span { display: block; }
-.featured-project h2 > span:first-child { font-size: clamp(46px,4.6vw,64px); letter-spacing: -.055em; line-height: 1.2; margin-bottom: 16px; }
-.featured-project h2 > span:last-child { font-size: clamp(20px,2vw,27px); line-height: 1.6; letter-spacing: -.02em; }
-.featured-project__visual { grid-area: visual; align-self: center; min-width: 0; }
-.featured-project__visual > .project-art { width: 100%; height: 430px; object-fit: contain; background: var(--surface-soft); }
-.featured-project__visual figcaption { padding-top: 12px; color: var(--muted); font-size: 12px; }
-.featured-project__content { grid-area: content; min-width: 0; }
-.featured-project__content > p { font-size: 15px; color: var(--muted); margin-top: 20px; }
-.featured-modules { list-style: none; padding: 0; margin: 22px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
-.featured-modules li { display: flex; align-items: center; gap: 8px; font-size: 12px; }
-.featured-modules .icon { color: var(--blue); }
-.featured-project__content > .featured-tech { font-family: var(--font-mono); font-size: 11px; line-height: 1.9; color: var(--faint); padding-top: 18px; border-top: 1px solid var(--line); }
-.featured-project .button { margin-top: 24px; }
-.project-continuity { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1.05fr; gap: 72px; }
-.project-continuity > p { font-size: 12px; color: var(--muted); }
-.project-continuity > div { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.project-continuity a { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; font-size: 13px; line-height: 1.8; }
-.project-continuity a:hover { color: var(--blue); }
+/* Project records share one scale; the complete honors display closes the page. */
+.home-project-row { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 28px; padding-block: 26px; border-top: 1px solid var(--line); }
+.home-project-row__period { font-family: var(--font-mono); font-size: 12px; color: var(--faint); padding-top: 5px; }
+.home-project-row h3 { font-size: 19px; line-height: 1.65; font-weight: 600; }
+.home-project-row h3 a { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 44px; }
+.home-project-row h3 .icon { flex-shrink: 0; color: var(--blue); }
+.home-project-row h3 a:hover { color: var(--blue); }
+.home-project-row p { max-width: 780px; color: var(--muted); font-size: 14px; margin-top: 8px; }
 .awards-preview--home { background: #0c2230; color: #eaf3fa; padding-block: 72px; }
 .awards-preview--home .eyebrow { color: #88d9ff; }
 .awards-preview--home .awards-preview__heading p { color: #b3c9d8; }
@@ -71,11 +56,9 @@
   .home-hero h1 { font-size: 52px; }
   .hero-description { max-width: 340px; }
   .hero-vignette { background: linear-gradient(90deg,#06141ff2 0%,#06141fc0 35%,#06141f10 86%); }
-  .featured-project { column-gap: 36px; }
-  .featured-modules { grid-template-columns: minmax(0,1fr); gap: 10px; }
-  .project-continuity { gap: 36px; }
   .awards-preview--home .awards-preview__layout { gap: 36px; }
   .home-certificate-preview__images { height: 320px; margin-inline: 0; }
+
 }
 @media (max-width: 767px) {
   .home-hero { min-height: clamp(490px,calc(100svh - 240px),580px); }
@@ -96,22 +79,10 @@
   .home-facts dt { font-size: 10px; margin-bottom: 6px; }
   .home-facts dd { font-size: clamp(15px,4.3vw,18px); white-space: nowrap; }
   .home-facts small { font-size: 10px; }
-  .home-projects { padding-top: 38px; }
-  .home-projects__heading { margin-bottom: 22px; }
-  .home-projects__heading .eyebrow { font-size: 10px; letter-spacing: .12em; }
-  .featured-project { grid-template-columns: minmax(0,1fr); grid-template-areas: 'heading' 'visual' 'content'; row-gap: 24px; }
-  .featured-project h2 > span:first-child { font-size: 48px; margin-bottom: 10px; }
-  .featured-project h2 > span:last-child { font-size: 21px; }
-  .featured-project__visual > .project-art { height: 280px; }
-  .featured-project__visual figcaption { font-size: 11px; }
-  .featured-project__content > p { margin-top: 0; font-size: 14px; }
-  .featured-modules { grid-template-columns: minmax(0,1fr); gap: 10px; margin-block: 20px; }
-  .featured-modules li { font-size: 13px; }
-  .featured-project__content > .featured-tech { margin-top: 20px; font-size: 11px; }
-  .featured-project .button { margin-top: 22px; }
-  .project-continuity { margin-top: 26px; padding-top: 20px; display: block; }
-  .project-continuity > div { margin-top: 10px; gap: 18px; }
-  .project-continuity a { font-size: 12px; }
+  .home-project-row { grid-template-columns: minmax(0,1fr); gap: 6px; padding-block: 20px; }
+  .home-project-row__period { padding: 0; font-size: 11px; }
+  .home-project-row h3 { font-size: 17px; }
+  .home-project-row p { font-size: 13px; margin-top: 5px; }
   .awards-preview--home { padding-block: 46px; }
   .awards-preview--home .awards-preview__layout { grid-template-columns: minmax(0,1fr); gap: 24px; }
   .awards-preview--home .awards-preview__heading { margin-bottom: 18px; }
