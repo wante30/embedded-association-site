@@ -17,6 +17,7 @@ from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright
 from certificate_review import review_certificates
 from motion_review import review_motion
+from home_review import review_home
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = Path(os.environ.get('REVIEW_OUTPUT', str(ROOT / 'artifacts/review')))
@@ -130,7 +131,7 @@ try:
                     prefix = urlsplit(BASE).path.rstrip('/') + '/'
                     check(f'{label} {route}: images and internal links stay under deployment prefix', page.locator('img, a[href]').evaluate_all('(elements, prefix) => elements.every(el => { const url = new URL(el.currentSrc || el.href); return url.origin !== location.origin || url.pathname.startsWith(prefix); })', prefix))
                 if route == '/':
-                    check(f'{label}: hero background decodes', page.locator('.hero-photo').evaluate('async el => { const url = getComputedStyle(el).backgroundImage.slice(5, -2); const img = new Image(); img.src = url; try { await img.decode(); return true; } catch { return false; } }'))
+                    check(f'{label}: hero background decodes', page.locator('.hero-photo img').evaluate('async img => { try { await img.decode(); return img.naturalWidth > 0; } catch { return false; } }'))
                 if route in ['/', '/about']:
                     preview = page.get_by_role('region', name='竞赛荣誉', exact=True)
                     published = [award for award in CONTENT['awards'] if not award['example']]
@@ -272,11 +273,11 @@ try:
                 preview.get_by_role('link', name='查看全部荣誉', exact=True).tap()
                 check(f'{label} {route}: preview opens the complete records', page.locator('.award-card').count() == len(CONTENT['awards']))
             load(page, '/')
-            check(f'{label}: circuit visual has a visible area separate from text', page.locator('.hero-visual').evaluate('''visual => {
-                const rect = visual.getBoundingClientRect();
-                const content = document.querySelector('.hero-content').getBoundingClientRect();
-                return rect.width > 0 && rect.height > 0 && rect.left >= 0 && rect.right <= innerWidth
-                    && (rect.top >= content.bottom || rect.bottom <= content.top);
+            check(f'{label}: circuit photo has clear space in the first viewport', page.locator('.hero-visual').evaluate('''visual => {
+                const hero = document.querySelector('.home-hero').getBoundingClientRect();
+                const actions = document.querySelector('.hero-actions').getBoundingClientRect();
+                return Math.min(hero.bottom, innerHeight) - actions.bottom >= 90
+                    && visual.getBoundingClientRect().width >= innerWidth;
             }'''))
             name = f'mobile-{width}-home-viewport.png'
             page.screenshot(path=str(OUT/name), animations='disabled')
@@ -351,6 +352,7 @@ try:
                 context.close()
             print(f'{width}px: all public routes fit', flush=True)
         if not INLINE:
+            review_home(browser, BASE, CONTENT, OUT, check)
             review_motion(browser, BASE, check)
         browser.close()
 except Exception as e:
