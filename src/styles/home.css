@@ -22,7 +22,7 @@
 .home-facts dt { font-size: 12px; color: #a8c0d0; }
 .home-facts dd { font-size: 20px; font-weight: 600; margin: 0; }
 .home-facts small { font-size: 12px; font-weight: 400; }
-/* Project records share one scale; honors are a quiet final entry. */
+/* Project records share one scale; the complete honors display closes the page. */
 .home-project-row { display: grid; grid-template-columns: 110px minmax(0,1fr); gap: 28px; padding-block: 26px; border-top: 1px solid var(--line); }
 .home-project-row__period { font-family: var(--font-mono); font-size: 12px; color: var(--faint); padding-top: 5px; }
 .home-project-row h3 { font-size: 19px; line-height: 1.65; font-weight: 600; }
@@ -30,17 +30,34 @@
 .home-project-row h3 .icon { flex-shrink: 0; color: var(--blue); }
 .home-project-row h3 a:hover { color: var(--blue); }
 .home-project-row p { max-width: 780px; color: var(--muted); font-size: 14px; margin-top: 8px; }
-.home-honors-entry { padding-block: 30px; background: var(--surface); border-top: 1px solid var(--line); }
-.home-honors-entry > .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
-.home-honors-entry h2 { font-size: 18px; }
-.home-honors-entry p { color: var(--muted); font-size: 13px; margin-top: 5px; }
-.home-honors-entry .text-link { min-height: 44px; }
+.awards-preview--home { background: #0c2230; color: #eaf3fa; padding-block: 72px; }
+.awards-preview--home .eyebrow { color: #88d9ff; }
+.awards-preview--home .awards-preview__heading p { color: #b3c9d8; }
+.awards-preview--home .button { background: transparent; color: #eaf3fa; border-color: #426074; }
+.awards-preview--home .button:hover { border-color: #88d9ff; }
+.awards-preview--home .awards-preview__layout { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 72px; }
+.awards-preview--home .awards-preview__grid { grid-template-columns: minmax(0,1fr); gap: 0; }
+.awards-preview--home .award-preview-card { gap: 8px; padding: 22px 0; border-color: #304957; }
+.awards-preview--home .award-preview-card__meta, .awards-preview--home .award-preview-card p { color: #b3c9d8; }
+.awards-preview--home .award-preview-card h3 { color: #e7c898; font-size: 19px; }
+.awards-preview--home .award-preview-card__meta .icon { color: #e7c898; }
+.awards-preview--home .award-preview-card .award-preview-card__team { color: #c7dce9; margin: 0; padding: 0; }
+.home-certificate-preview { display: block; min-width: 0; }
+.home-certificate-preview__images { position: relative; display: block; height: 370px; margin: 20px 20px 32px; }
+.home-certificate-preview img { position: absolute; width: 68%; height: auto; max-height: 82%; object-fit: contain; filter: drop-shadow(0 14px 20px #020e1870); transition: transform .4s; }
+.home-certificate-preview img:nth-child(1) { left: 0; top: 3%; transform: rotate(-7deg); }
+.home-certificate-preview img:nth-child(2) { right: 0; top: 30%; transform: rotate(5deg); }
+.home-certificate-preview img:nth-child(3) { left: 12%; top: 8%; width: 45%; transform: rotate(-2deg); }
+.home-certificate-preview:hover img:first-child { transform: rotate(-9deg) translateY(-5px); }
+.home-certificate-preview > span:last-child { display: flex; align-items: center; justify-content: space-between; min-height: 44px; border-top: 1px solid #304957; color: #c7dce9; font-size: 13px; }
 .home-directions { border-bottom: 1px solid var(--line); }
 @media (max-width: 999px) {
   .hero-content { padding-block: 64px 84px; }
   .home-hero h1 { font-size: 52px; }
   .hero-description { max-width: 340px; }
   .hero-vignette { background: linear-gradient(90deg,#06141ff2 0%,#06141fc0 35%,#06141f10 86%); }
+  .awards-preview--home .awards-preview__layout { gap: 36px; }
+  .home-certificate-preview__images { height: 320px; margin-inline: 0; }
 
 }
 @media (max-width: 767px) {
@@ -66,10 +83,12 @@
   .home-project-row__period { padding: 0; font-size: 11px; }
   .home-project-row h3 { font-size: 17px; }
   .home-project-row p { font-size: 13px; margin-top: 5px; }
-  .home-honors-entry { padding-block: 24px; }
-  .home-honors-entry > .container { gap: 16px; }
-  .home-honors-entry h2 { font-size: 17px; }
-  .home-honors-entry p { max-width: 170px; font-size: 12px; }
+  .awards-preview--home { padding-block: 46px; }
+  .awards-preview--home .awards-preview__layout { grid-template-columns: minmax(0,1fr); gap: 24px; }
+  .awards-preview--home .awards-preview__heading { margin-bottom: 18px; }
+  .home-certificate-preview__images { height: 260px; max-width: 330px; margin: 16px auto 24px; }
+  .awards-preview--home .award-preview-card { padding-block: 20px; }
+  .awards-preview--home .award-preview-card h3 { font-size: 18px; }
   .home-activities .activity-grid { gap: 0; }
   .home-activities .activity-card { display: grid; grid-template-columns: 105px minmax(0,1fr); gap: 16px; padding-block: 20px; border-bottom: 1px solid var(--line); }
   .home-activities .activity-card:first-child { padding-top: 0; }

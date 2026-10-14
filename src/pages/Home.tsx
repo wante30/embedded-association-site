@@ -4,6 +4,7 @@ import { Icon } from '../components/Icon';
 import { ActivityCard } from '../components/Cards';
 import { Directions, JoinBanner, SectionTitle } from '../components/UI';
 import { assetPath } from '../lib/assetPath.mjs';
+import { AwardsPreview } from '../components/AwardsPreview';
 import '../styles/home.css';
 
 export default function Home() {
@@ -54,9 +55,6 @@ export default function Home() {
       </article>)}</div>
     </div></section>
     <JoinBanner/>
-    <section className="home-honors-entry" aria-labelledby="home-honors-heading"><div className="container" data-reveal>
-      <div><h2 id="home-honors-heading">竞赛荣誉</h2><p>公开的竞赛成果与证书记录。</p></div>
-      <Link to="/awards" className="text-link">浏览荣誉<Icon name="arrow" size={17}/></Link>
-    </div></section>
+    <AwardsPreview showCertificates/>
   </>;
 }

@@ -1,4 +1,4 @@
-"""Association-first homepage, responsive circuit imagery, and final honors entry."""
+"""Association-first homepage, responsive circuit imagery, and final honors section."""
 from io import BytesIO
 from PIL import Image, ImageStat
 
@@ -38,12 +38,16 @@ def review_home(browser, base, content, out, check):
         check(label + ': all project titles follow the content source', rows.locator('h3').all_text_contents() == [project['name'] for project in content['projects']])
         check(label + ': project titles share a restrained scale', rows.locator('h3').evaluate_all('els => { const sizes=els.map(el => parseFloat(getComputedStyle(el).fontSize)); return sizes.length>0 && new Set(sizes).size===1 && Math.max(...sizes)<=20; }'))
         page.screenshot(path=str(out / f'home-{width}-{"dark" if dark else "light"}-{dpr}x-viewport.png'), animations='disabled')
-        entry = page.get_by_role('region', name='竞赛荣誉', exact=True)
-        entry.scroll_into_view_if_needed()
-        check(label + ': honors are the final homepage section', entry.evaluate('el => el === document.querySelector("main").lastElementChild && el.previousElementSibling.matches(".join-banner")'))
-        check(label + ': honors remain compact', entry.evaluate('el => el.getBoundingClientRect().height <= 180'))
-        check(label + ': honors entry opens the complete archive', entry.get_by_role('link', name='浏览荣誉', exact=True).evaluate('el => el.href') == base + '/awards')
-        check(label + ': homepage omits the expanded award and certificate displays', page.locator('.awards-preview, img[src*="/certificates/"]').count() == 0 and not full_certificates)
+        honors = page.get_by_role('region', name='竞赛荣誉', exact=True)
+        honors.scroll_into_view_if_needed()
+        check(label + ': complete honors section closes the homepage', honors.evaluate('el => el === document.querySelector("main").lastElementChild && el.previousElementSibling.matches(".join-banner")'))
+        preview = honors.locator('.home-certificate-preview')
+        preview.locator('img').evaluate_all('imgs => imgs.forEach(img => img.loading="eager")')
+        preview.locator('img').evaluate_all('async imgs => await Promise.all(imgs.map(img => img.decode()))')
+        expected = [base + award['certificate']['thumbnail'] for award in content['awards'][:3]]
+        check(label + ': bottom section retains the published certificate collage', preview.locator('img').evaluate_all('imgs => imgs.map(img => img.currentSrc)') == expected)
+        check(label + ': bottom preview loads without full certificates', not full_certificates)
+        check(label + ': bottom preview opens the certificate wall', preview.evaluate('el => el.href') == base + '/awards')
         check(label + ': no horizontal overflow', page.evaluate('document.documentElement.scrollWidth<=innerWidth'))
         check(label + ': no console errors', not errors)
         if width in [390,1440] and not dark and dpr == 1:
