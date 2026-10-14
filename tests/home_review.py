@@ -33,7 +33,7 @@ def review_home(browser, base, content, out, check):
             tile = Image.open(BytesIO(shot)).convert('RGB').crop((12*dpr,area['top']*dpr,(width-12)*dpr,area['bottom']*dpr))
             check(label + ': visible circuit region has photographic detail', max(ImageStat.Stat(tile).stddev) > 12)
         check(label + ': hero introduces the association and learning resources', page.locator('.hero-actions a').evaluate_all('els => els.map(el => ({text:el.textContent,href:el.href}))') == [{'text':'了解协会','href':base+'/about'},{'text':'学习资源','href':base+'/resources'}])
-        check(label + ': learning and activities precede project records', page.evaluate('document.querySelector(".home-directions").offsetTop < document.querySelector(".home-activities").offsetTop && document.querySelector(".home-activities").offsetTop < document.querySelector(".home-projects").offsetTop'))
+        check(label + ': activities precede learning directions and project records', page.evaluate('document.querySelector(".home-activities").offsetTop < document.querySelector(".home-directions").offsetTop && document.querySelector(".home-directions").offsetTop < document.querySelector(".home-projects").offsetTop'))
         directions = page.locator('.home-directions .direction-card')
         check(label + ': learning directory retains every published direction', directions.locator('h3').all_text_contents() == [direction['name'] for direction in content['directions']] and directions.locator('p').all_text_contents() == [direction['tags'] for direction in content['directions']])
         activities = page.locator('.home-activities .activity-card')
