@@ -119,7 +119,7 @@ try:
                 check(f'{label} {route}: no horizontal overflow', page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 check(f'{label} {route}: images loaded', page.evaluate('Array.from(document.images).every(img => img.complete && img.naturalWidth > 0)'))
                 check(f'{label} {route}: images decode', page.evaluate('async () => (await Promise.all(Array.from(document.images, img => img.decode().then(() => true, () => false)))).every(Boolean)'))
-                displayed_projects = CONTENT['projects'][:1] if route == '/' else CONTENT['projects'] if route == '/projects' else []
+                displayed_projects = CONTENT['projects'] if route == '/projects' else []
                 expected = [project['image'] for project in displayed_projects if project['image']]
                 expected += [a['image'] for a in CONTENT['activities'] if a['image']] if route in ['/', '/activities'] else []
                 expected += [entry['image'] for group in ['projects', 'activities'] for entry in CONTENT[group] if route == f'/{group}/{entry["id"]}' and entry['image']]
@@ -132,7 +132,7 @@ try:
                     check(f'{label} {route}: images and internal links stay under deployment prefix', page.locator('img, a[href]').evaluate_all('(elements, prefix) => elements.every(el => { const url = new URL(el.currentSrc || el.href); return url.origin !== location.origin || url.pathname.startsWith(prefix); })', prefix))
                 if route == '/':
                     check(f'{label}: hero background decodes', page.locator('.hero-photo img').evaluate('async img => { try { await img.decode(); return img.naturalWidth > 0; } catch { return false; } }'))
-                if route in ['/', '/about']:
+                if route == '/about':
                     preview = page.get_by_role('region', name='竞赛荣誉', exact=True)
                     published = [award for award in CONTENT['awards'] if not award['example']]
                     cards = preview.locator('.award-preview-card')
@@ -260,13 +260,21 @@ try:
             if not INLINE:
                 review_certificates(page, BASE, CONTENT, OUT, check, check_touch_targets, f'touch-{width}')
                 load(page, '/')
-            page.locator('.hero-actions').get_by_role('link', name='竞赛荣誉', exact=True).tap()
-            check(f'{label}: home hero opens all awards without the menu', page.locator('.award-card').count() == len(CONTENT['awards']))
+            page.locator('.hero-actions').get_by_role('link', name='了解协会', exact=True).tap()
+            check(f'{label}: home hero opens the association introduction', page.locator('.about-actions').count() == 1)
+            load(page, '/')
+            page.locator('.hero-actions').get_by_role('link', name='学习资源', exact=True).tap()
+            check(f'{label}: home hero opens learning resources', page.get_by_role('list', name='FPGA 学习路线', exact=True).count() == 1)
+            load(page, '/')
+            honors_entry = page.locator('.home-honors-entry').get_by_role('link', name='浏览荣誉', exact=True)
+            check_touch_targets(f'{label} final honors entry', honors_entry)
+            honors_entry.tap()
+            check(f'{label}: final home entry opens all awards', page.locator('.award-card').count() == len(CONTENT['awards']))
             load(page, '/about')
             check_touch_targets(f'{label} about introduction', page.locator('.about-actions a'))
             page.locator('.about-actions').get_by_role('link', name='查看竞赛荣誉', exact=True).tap()
             check(f'{label}: about introduction opens all awards without the menu', page.locator('.award-card').count() == len(CONTENT['awards']))
-            for route in ['/', '/about']:
+            for route in ['/about']:
                 load(page, route)
                 preview = page.get_by_role('region', name='竞赛荣誉', exact=True)
                 check_touch_targets(f'{label} {route} award preview', preview.get_by_role('link', name='查看全部荣誉', exact=True))
