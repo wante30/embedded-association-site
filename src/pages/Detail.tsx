@@ -37,17 +37,17 @@ export function ProjectDetail({ project: p }: { project: Project }) {
         </aside>
         <div className="detail-content">
           {p.example && <ExampleNote>本页为项目结构示例，未声明真实实验结果。</ExampleNote>}
-          <section>
+          <section data-reveal>
             <span className="eyebrow">01 / CONTEXT</span>
             <h2>从什么问题出发</h2>
             <p>{p.background}</p>
           </section>
-          <section>
+          <section data-reveal>
             <span className="eyebrow">02 / APPROACH</span>
             <h2>希望实现什么</h2>
             <p>{p.goal}</p>
           </section>
-          <section>
+          <section data-reveal>
             <span className="eyebrow">03 / SYSTEM</span>
             <h2>让每个环节协同运行</h2>
             <ul className="system-flow">
@@ -57,12 +57,12 @@ export function ProjectDetail({ project: p }: { project: Project }) {
               </li>)}
             </ul>
           </section>
-          <section>
+          <section data-reveal>
             <span className="eyebrow">04 / RECORD</span>
             <h2>阶段成果与验证记录</h2>
             <p>{p.result}</p>
           </section>
-          {relatedProjects.length > 0 && <section className="related-projects">
+          {relatedProjects.length > 0 && <section className="related-projects" data-reveal>
             <span className="eyebrow">05 / RELATED PROJECTS</span>
             <h2>相关项目</h2>
             <p>围绕老年健康与智慧养老方向持续演进。</p>

@@ -8,7 +8,7 @@ const mediaPath = (path: string) => assetPath(path, import.meta.env.BASE_URL || 
 export function CertificateThumbnail({ certificate, title, sourceLabel, onOpen }: { certificate: Certificate; title: string; sourceLabel: string; onOpen: () => void }) {
   const [failed, setFailed] = useState(false);
   return <button className="certificate-thumbnail" onClick={onOpen} aria-label={`查看${title}的${sourceLabel}大图`} aria-haspopup="dialog">
-    {!failed && <img src={mediaPath(certificate.thumbnail)} alt={`${sourceLabel}，公开脱敏副本`} loading="lazy" decoding="async" onError={() => setFailed(true)}/>}
+    {failed ? <span role="status">预览暂不可用，点击查看大图</span> : <img src={mediaPath(certificate.thumbnail)} alt={`${title}，${sourceLabel}公开副本`} width={certificate.width} height={certificate.height} loading="lazy" decoding="async" onError={() => setFailed(true)}/>}
     <span>{sourceLabel}<Icon name="search" size={15}/>查看大图</span>
   </button>;
 }

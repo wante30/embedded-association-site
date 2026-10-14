@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { usePath } from './lib/router';
+import { useScrollReveal } from './lib/useScrollReveal';
 import { Layout } from './components/Layout';
 import { activities, projects, site } from './content';
 import pageTitles from './content/routes.json';
@@ -16,6 +17,7 @@ const names: Record<string,string> = pageTitles;
 export default function App() {
   const path = usePath();
   const first = useRef(true);
+  const main = useRef<HTMLElement>(null);
   const project = path.startsWith('/projects/') ? projects.find(p => `/projects/${p.id}` === path) : undefined;
   const activity = path.startsWith('/activities/') ? activities.find(a => `/activities/${a.id}` === path) : undefined;
   const title = project?.name || activity?.title || names[path] || '页面未找到';
@@ -26,6 +28,7 @@ export default function App() {
     if (!first.current) { window.scrollTo(0,0); document.getElementById('main')?.focus({preventScroll:true}); }
     first.current = false;
   },[path,title,project,activity]);
+  useScrollReveal(main, path);
   const page = project ? <ProjectDetail project={project}/> : activity ? <ActivityDetail activity={activity}/> : path === '/' ? <Home/> : path === '/about' ? <About/> : path === '/projects' ? <Projects/> : path === '/activities' ? <Activities/> : path === '/awards' ? <Awards/> : path === '/members' ? <Members/> : path === '/resources' ? <Resources key={window.location.search}/> : path === '/join' ? <Join/> : <NotFound/>;
-  return <Layout><main id="main" tabIndex={-1} key={path}>{page}</main></Layout>;
+  return <Layout><main ref={main} id="main" tabIndex={-1} key={path}>{page}</main></Layout>;
 }

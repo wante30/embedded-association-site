@@ -16,6 +16,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright
 from certificate_review import review_certificates
+from motion_review import review_motion
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = Path(os.environ.get('REVIEW_OUTPUT', str(ROOT / 'artifacts/review')))
@@ -183,11 +184,13 @@ try:
         load(page,'/awards')
         page.get_by_role('button',name='国家级',exact=True).click()
         check('award filtering works',page.locator('.award-card').count()==sum(award['level']=='国家级' for award in CONTENT['awards']))
+        check('wall and text archive share the level filter',page.locator('.certificate-wall__item').count()==page.locator('.award-card').count())
         check('awards omit advisor information', '指导教师' not in page.locator('main').inner_text())
         check('published awards contain no placeholder labels', '待核实' not in page.locator('.awards-timeline').inner_text() and '示例' not in page.locator('.awards-timeline').inner_text())
         page.get_by_role('button',name='全部',exact=True).click()
         page.get_by_role('searchbox').fill('蔡永胜')
         check('award search finds both stages for a member', page.locator('.award-card').count()==2)
+        check('wall and text archive share search results',page.locator('.certificate-wall__item').count()==2)
         page.get_by_role('button',name='校级',exact=True).click()
         check('award search and level filter combine', page.locator('.empty-state').count()==1)
         page.get_by_role('button',name='查看全部内容',exact=True).click()
@@ -347,6 +350,8 @@ try:
                 check(f'{width}px {route}: no overflow',page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
                 context.close()
             print(f'{width}px: all public routes fit', flush=True)
+        if not INLINE:
+            review_motion(browser, BASE, check)
         browser.close()
 except Exception as e:
     report['errors'].append(str(e))
