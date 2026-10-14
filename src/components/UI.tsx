@@ -6,7 +6,19 @@ export function SectionTitle({ eyebrow, title, description, to, action = '了解
   return <div data-reveal className={`section-heading ${centered ? 'section-heading--center' : ''}`}><div>{eyebrow && <span className="eyebrow">{eyebrow}</span>}<h2>{title}</h2>{description && <p>{description}</p>}</div>{to && <Link to={to} className="text-link">{action}<Icon name="arrow" size={17}/></Link>}</div>;
 }
 export function ExampleNote({ children = '当前为视觉预览，以下内容为展示示例，不代表已核实的协会记录。' }: { children?: ReactNode }) { return <p className="example-note"><span className="example-dot"/>{children}</p>; }
-export function Directions({ compact = false }: { compact?: boolean }) { return <div className={`directions-grid ${compact ? 'directions-grid--compact' : ''}`}>{directions.map(d => <Link to={`/resources?category=${encodeURIComponent(d.resourceCategory)}`} data-reveal className={`direction-card${d.id === 'fpga' ? ' direction-card--featured' : ''}`} key={d.id}><span className="direction-icon"><Icon name={d.icon} size={29}/></span><h3>{d.name}</h3><p>{d.tags}</p>{!compact && <span className="direction-detail">{d.description}</span>}</Link>)}</div>; }
+export function Directions({ compact = false }: { compact?: boolean }) {
+  return <div className={`directions-grid ${compact ? 'directions-grid--compact' : ''}`}>
+    {directions.map(direction => <Link
+      to={direction.id === 'contests' ? '/resources#recommended-competitions' : `/resources?category=${encodeURIComponent(direction.resourceCategory)}`}
+      data-reveal className={`direction-card${direction.id === 'fpga' ? ' direction-card--featured' : ''}`} key={direction.id}
+    >
+      <span className="direction-icon"><Icon name={direction.icon} size={29}/></span>
+      <h3>{direction.name}</h3><p>{direction.tags}</p>
+      {compact && <span className="direction-arrow" aria-hidden="true"><Icon name="arrow" size={17}/></span>}
+      {!compact && <span className="direction-detail">{direction.description}</span>}
+    </Link>)}
+  </div>;
+}
 export function FilterTabs({ items, value, onChange, label = '分类筛选' }: { items: string[]; value: string; onChange: (value: string) => void; label?: string }) { return <div className="filter-tabs" aria-label={label} role="group">{items.map(item => <button key={item} type="button" className={value === item ? 'is-active' : ''} aria-pressed={value === item} onClick={() => onChange(item)}>{item}</button>)}</div>; }
 export function SearchField({ value, onChange, placeholder = '搜索项目或技术…' }: { value: string; onChange: (value: string) => void; placeholder?: string }) { return <label className="search-field"><Icon name="search" size={18}/><span className="sr-only">{placeholder}</span><input type="search" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}/>{value && <button type="button" aria-label="清空搜索" onClick={() => onChange('')}><Icon name="close" size={15}/></button>}</label>; }
 export function EmptyState({ reset }: { reset?: () => void }) { return <div className="empty-state" role="status"><Icon name="search" size={35}/><h2>还没有匹配的内容</h2><p>换个关键词，或者看看其他分类。</p>{reset && <button className="button button--outline" onClick={reset}>查看全部内容</button>}</div>; }

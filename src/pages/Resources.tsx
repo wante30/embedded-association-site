@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { site, resources, learningPaths, fpgaLearningPaths } from '../content';
 import { Icon } from '../components/Icon';
 import { EmptyState, FilterTabs, SearchField } from '../components/UI';
+import { RecommendedCompetitions } from '../components/RecommendedCompetitions';
 
 const categories = ['全部', 'FPGA', '单片机', '嵌入式', '物联网', '人工智能', '开发工具'];
 
@@ -44,12 +45,14 @@ export default function Resources() {
           </div>
           <div className="resource-stack" aria-hidden="true"><span/><span/><span><Icon name="book" size={49}/></span></div>
         </div>
+        <nav className="resource-jumps" aria-label="资源页目录"><a href="#learning-routes">学习路线</a><a href="#recommended-competitions">推荐竞赛</a><a href="#official-resources">官方文档</a></nav>
         <p className="learning-intro">按基础与兴趣选择路线，从小练习开始，逐步进入系统与项目实践。</p>
-        <div className="learning-routes">
+        <div className="learning-routes" id="learning-routes">
           <LearningRoute title="数字电路 / FPGA" description="从逻辑设计到 RTL、仿真验证与板级调试。" label="FPGA 学习路线" steps={fpgaLearningPaths}/>
           <LearningRoute title="单片机 / 嵌入式" description="从常用外设到实时系统、通信与项目联调。" label="单片机与嵌入式学习路线" steps={learningPaths}/>
         </div>
-        <div className="collection-toolbar">
+        <RecommendedCompetitions/>
+        <div className="collection-toolbar" id="official-resources">
           <FilterTabs items={categories} value={category} onChange={setCategory}/>
           <SearchField value={query} onChange={setQuery} placeholder="搜索学习资源…"/>
         </div>

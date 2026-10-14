@@ -794,5 +794,139 @@
       "title": "FPGA 板级实践",
       "topics": "LED、按键、数码管与串口；综合、实现、下载与板上调试"
     }
-  ]
+  ],
+  "competitionRecommendations": {
+    "version": "2026",
+    "sourceTitle": "单片机与嵌入式协会推荐参赛竞赛名单（2026 版）",
+    "description": "围绕单片机、嵌入式系统、物联网、FPGA、机器人与边缘智能，按基础和项目方向选择赛事。",
+    "note": "S / A / B 为协会规划中的推荐层级；参赛形式与年级为资料建议。具体赛项、报名时间、组队人数和器材要求以各赛事当届官方通知为准。本名单不表示已有报名或组队安排。",
+    "groups": [
+      {
+        "id": "S",
+        "title": "建议长期核心赛事",
+        "description": "适合持续开展基础训练与工程项目实践。"
+      },
+      {
+        "id": "A",
+        "title": "建议重点组队",
+        "description": "围绕硬件、控制、机器人与综合系统选择方向。"
+      },
+      {
+        "id": "B",
+        "title": "按方向选择参加",
+        "description": "根据成员兴趣、项目基础和组织条件选择。"
+      }
+    ],
+    "entries": [
+      {
+        "priority": "S",
+        "name": "蓝桥杯全国软件和信息技术专业人才大赛（电子赛）",
+        "topics": "单片机 / STM32嵌入式 / EDA / FPGA",
+        "format": "个人赛",
+        "years": "大一—大三",
+        "purpose": "协会基础训练、新人选拔",
+        "id": "lanqiao-electronics"
+      },
+      {
+        "priority": "S",
+        "name": "全国大学生嵌入式芯片与系统设计竞赛",
+        "topics": "MCU / SoC / FPGA / IoT / Edge AI",
+        "format": "团队赛",
+        "years": "大二—大三",
+        "purpose": "核心工程项目赛",
+        "id": "embedded-chip-system"
+      },
+      {
+        "priority": "S",
+        "name": "全国大学生物联网设计竞赛",
+        "topics": "ESP32 / MCU / 传感器 / 通信 / 边缘AI / 系统集成",
+        "format": "团队赛",
+        "years": "大二—大三",
+        "purpose": "综合物联网项目、企业命题",
+        "id": "iot-design"
+      },
+      {
+        "priority": "A",
+        "name": "全国大学生电子设计竞赛",
+        "topics": "模电 / 数电 / MCU / FPGA / 控制 / 信号",
+        "format": "团队赛",
+        "years": "大二—大三",
+        "purpose": "高水平硬件综合训练",
+        "id": "electronic-design"
+      },
+      {
+        "priority": "A",
+        "name": "全国大学生智能汽车竞赛",
+        "topics": "MCU / 电机控制 / PID / 视觉 / 传感器 / PCB",
+        "format": "团队赛",
+        "years": "大二—大三",
+        "purpose": "控制、嵌入式、视觉专项",
+        "id": "smart-car"
+      },
+      {
+        "priority": "A",
+        "name": "中国大学生计算机设计大赛（物联网应用等相关类别）",
+        "topics": "物联网 / 嵌入式 / Web / AI / 系统展示",
+        "format": "团队赛",
+        "years": "大一—大三",
+        "purpose": "成熟综合项目复用",
+        "id": "computer-design"
+      },
+      {
+        "priority": "A",
+        "name": "中国机器人及人工智能大赛",
+        "topics": "机器人 / 嵌入式 / 视觉 / AI / 控制",
+        "format": "团队赛",
+        "years": "大二—大三",
+        "purpose": "AI与硬件交叉项目",
+        "id": "robot-ai"
+      },
+      {
+        "priority": "A",
+        "name": "中国高校智能机器人创意大赛",
+        "topics": "机器人 / 创意系统 / 传感器 / 控制 / AI",
+        "format": "团队赛",
+        "years": "大一—大三",
+        "purpose": "创新型机器人作品",
+        "id": "creative-robot"
+      },
+      {
+        "priority": "B",
+        "name": "睿抗机器人开发者大赛（RAICOM）",
+        "topics": "机器人 / 嵌入式 / 算法 / 智能硬件",
+        "format": "团队赛",
+        "years": "大一—大三",
+        "purpose": "机器人方向补充赛事",
+        "id": "raicom"
+      },
+      {
+        "priority": "B",
+        "name": "全国大学生集成电路创新创业大赛",
+        "topics": "FPGA / SoC / EDA / 芯片应用",
+        "format": "团队赛",
+        "years": "大二—大三",
+        "purpose": "FPGA、数字系统专项",
+        "id": "ic-innovation"
+      },
+      {
+        "priority": "B",
+        "name": "iCAN大学生创新创业大赛",
+        "topics": "智能硬件 / IoT / 嵌入式 / 创新应用",
+        "format": "团队赛",
+        "years": "大一—大三",
+        "purpose": "智能硬件项目拓展",
+        "id": "ican"
+      },
+      {
+        "priority": "B",
+        "name": "中国大学生工程实践与创新能力大赛（相关赛项）",
+        "topics": "工程实践 / 智能系统 / 控制 / 机器人",
+        "format": "团队赛",
+        "years": "大二—大三",
+        "purpose": "工程综合拓展",
+        "id": "engineering-practice"
+      }
+    ],
+    "advice": "建议先围绕 2—3 个核心赛事形成训练积累，再按兴趣拓展专项；成熟项目参赛或改版时，应核对当届赛事的原创性、重复参赛与知识产权要求。"
+  }
 }
