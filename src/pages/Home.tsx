@@ -38,14 +38,13 @@ export default function Home() {
       <div><dt>指导教师</dt><dd>{site.advisor}</dd></div>
     </dl></section>
 
-    <section className="section home-directions"><div className="container">
-      <SectionTitle eyebrow="LEARN BY BUILDING" title="学习与实践" description="从数字逻辑、HDL 到嵌入式系统，找到适合自己的实践入口。" to="/resources" action="学习路线"/>
-      <Directions compact/>
-    </div></section>
-
     <section className="section section--white home-activities"><div className="container">
       <SectionTitle eyebrow="ASSOCIATION JOURNAL" title="协会活动" description="技术培训、协会纳新与竞赛训练。" to="/activities" action="全部活动"/>
       <div className="activity-grid">{activities.map(activity => <ActivityCard key={activity.id} activity={activity}/>)}</div>
+    </div></section>
+    <section className="section home-directions"><div className="container">
+      <SectionTitle eyebrow="LEARN BY BUILDING" title="学习与实践" description="从数字逻辑、HDL 到嵌入式系统，找到适合自己的实践入口。" to="/resources" action="学习路线"/>
+      <Directions compact/>
     </div></section>
     <section className="section home-projects"><div className="container">
       <SectionTitle eyebrow="PROJECT PRACTICE" title="项目实践" description="围绕老年健康与智慧养老方向持续演进。" to="/projects" action="全部项目"/>
