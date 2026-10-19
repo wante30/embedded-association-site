@@ -57,6 +57,11 @@ if (data) {
     assert.ok(recommendations.entries.every(entry => !Object.hasOwn(entry, 'award') && !Object.hasOwn(entry, 'certificate')));
   });
   test('signup remains disabled until a real recruitment entry exists', () => assert.equal(data.site.recruitmentUrl, ''));
+  test('the association group QR is published with the site', () => {
+    assert.ok(data.site.recruitmentQr.startsWith('/images/'));
+    assert.ok(existsSync(new URL(`../public${data.site.recruitmentQr}`, import.meta.url)), data.site.recruitmentQr);
+    assert.match(data.site.recruitmentQrValidUntil, /^\d{4}-\d{2}-\d{2}$/);
+  });
   test('public structured content does not contain private phone or identity numbers', () => {
     const text = JSON.stringify(data);
     assert.doesNotMatch(text, /\b1\d{10}\b/);

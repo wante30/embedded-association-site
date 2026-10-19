@@ -210,8 +210,12 @@ try:
         check('FAQ opens',first.get_attribute('open') is not None)
         first.locator('summary').click()
         check('FAQ closes',first.get_attribute('open') is None)
-        check('missing signup cannot collect data',page.get_by_role('button',name='纳新群筹备中').is_disabled())
+        qr=page.locator('.join-qr img')
+        check('join page shows the association group QR',qr.count()==1 and qr.evaluate('img => img.complete && img.naturalWidth > 0'))
+        check('join group QR renders large enough to scan',qr.evaluate('img => img.getBoundingClientRect().width')>=140)
+        check('group QR states its validity window','有效期至' in page.locator('.join-qr').inner_text())
         check('no fake submission form',page.locator('form').count()==0)
+        check('join page collects no personal data',page.locator('form input, form textarea, input[type=email], input[type=tel]').count()==0)
         for project in CONTENT['projects']:
             load(page,'/')
             entry = page.locator(f'main a[href$="/projects/{project["id"]}"]').first
@@ -321,7 +325,7 @@ try:
             menu.tap()
             dialog.locator('a[href$="/join"]').tap()
             page.locator('h1').wait_for()
-            check(f'{label}: final navigation item is reachable', page.get_by_role('button',name='纳新群筹备中').is_disabled())
+            check(f'{label}: final navigation item is reachable', page.url.endswith('/join') and page.locator('.join-qr img').count()==1)
             check(f'{label}: navigation closes the dialog', not dialog.is_visible())
             menu.tap()
             dialog.locator('a[href$="/projects"]').tap()
