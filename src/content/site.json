@@ -13,6 +13,8 @@
     "contact": "联系协会负责人",
     "github": "https://github.com/wante30/embedded-association-site",
     "recruitmentUrl": "",
+    "recruitmentQr": "/images/association-dingtalk-qr.png",
+    "recruitmentQrValidUntil": "2027-10-19",
     "email": "",
     "preview": false,
     "audience": "主要面向集成电路专业学生，欢迎对数字电路、FPGA 与嵌入式系统感兴趣的同学参与。"
@@ -202,7 +204,7 @@
       "art": "community",
       "duration": "2024 纳新",
       "example": false,
-      "body": "2024 年协会开展线下纳新宣传，通过现场展板与交流介绍协会的技术方向、实践内容和成长路径。当前官网暂未建立新的纳新群，后续入口会在“加入我们”页面更新。",
+      "body": "2024 年协会开展线下纳新宣传，通过现场展板与交流介绍协会的技术方向、实践内容和成长路径。协会钉钉交流群二维码已更新在“加入我们”页面，可扫码进群了解后续安排。",
       "outline": [
         "介绍协会与学院归属",
         "展示技术方向与竞赛实践",
@@ -770,7 +772,7 @@
     },
     {
       "question": "怎样了解招新时间和报名方式？",
-      "answer": "当前尚未建立新的纳新群。后续纳新群和报名入口确认后会在本页更新；现阶段可联系协会负责人了解情况。"
+      "answer": "在“加入我们”页面扫描协会钉钉交流群二维码进群即可，纳新时间、培训安排和报名入口都会在群内通知；也可以到实训楼 501 找协会负责人当面了解。"
     },
     {
       "question": "协会在哪里开展实践？",
