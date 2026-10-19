@@ -6,7 +6,7 @@
     "college": "计算机科学与技术学院",
     "englishName": "MCU & EMBEDDED ASSOCIATION",
     "tagline": "让代码驱动硬件，让创意真正运行。",
-    "description": "成立于 2024 年，主要面向集成电路专业学生，围绕数字电路、FPGA 与嵌入式系统开展学习与实践。",
+    "description": "面向集成电路、物联网、网络工程、计算机科学与技术、电子信息、测控技术与仪器、通信工程等专业，围绕单片机、嵌入式、物联网、FPGA、EDA、计算机视觉与边缘计算开展学习与实践。",
     "founded": "2024",
     "location": "实训楼 501",
     "advisor": "高俊锋",
@@ -17,7 +17,7 @@
     "recruitmentQrValidUntil": "2027-10-19",
     "email": "",
     "preview": false,
-    "audience": "主要面向集成电路专业学生，欢迎对数字电路、FPGA 与嵌入式系统感兴趣的同学参与。"
+    "audience": "主要面向集成电路、物联网、网络工程、计算机科学与技术、电子信息、测控技术与仪器、通信工程等专业，欢迎感兴趣的同学参与。"
   },
   "directions": [
     {

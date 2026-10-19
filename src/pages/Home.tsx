@@ -19,7 +19,7 @@ export default function Home() {
         <p className="hero-description">{site.description}</p>
         <div className="hero-actions">
           <Link to="/about" className="button button--primary">了解协会<Icon name="arrow" size={18}/></Link>
-          <Link to="/resources" className="button button--glass">学习资源<Icon name="arrow" size={17}/></Link>
+          <Link to="/join" className="button button--glass">如何加入<Icon name="arrow" size={17}/></Link>
         </div>
       </div>
       <div className="hero-visual">
